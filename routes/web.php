@@ -23,3 +23,7 @@ Route::get('/tournaments', function() { return back(); })->name('tournaments.ind
 
 Route::get('/posts/{id}/', function ($id) { return back(); })->name('posts.show');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
