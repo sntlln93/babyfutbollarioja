@@ -21,8 +21,8 @@ class CreateGamesTable extends Migration
             $table->string('state')->default('PENDIENTE');
 
             $table->foreignId('tournament_id')->constrained();
-            $table->foreign('local_id')->references('id')->on('users');
-            $table->foreign('away_id')->references('id')->on('users');
+            $table->foreign('local_id')->references('id')->on('teams');
+            $table->foreign('away_id')->references('id')->on('teams');
             $table->timestamps();
         });
     }
