@@ -20,9 +20,13 @@ class CreateGamesTable extends Migration
             $table->integer('away_score');
             $table->string('state')->default('PENDIENTE');
 
-            $table->foreignId('tournament_id')->constrained();
+            $table->unsignedBigInteger('local_id');
+            $table->unsignedBigInteger('away_id');
+
             $table->foreign('local_id')->references('id')->on('teams');
             $table->foreign('away_id')->references('id')->on('teams');
+
+            $table->foreignId('tournament_id')->constrained();
             $table->timestamps();
         });
     }
