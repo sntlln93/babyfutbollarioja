@@ -2,28 +2,40 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Web\WebController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Web\ShowPostController;
+use App\Http\Controllers\Web\ShowTournamentController;
 
-Route::get('/', [WebController::class, 'index'])->name('index');
-Route::get('/sponsors', [WebController::class, 'sponsors'])->name('sponsors');
-Route::get('/about-us', [WebController::class, 'about'])->name('about-us');
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\PlayerController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\TournamentController;
 
-Route::get('/tournaments/{id}/', function ($id) { return back(); })->name('tournaments.show');
-Route::get('/tournaments', function() { return back(); })->name('tournaments.index');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
 
-Route::get('/posts/{id}/', function ($id) { return back(); })->name('posts.show');
+Route::get('reset-password', [ResetPasswordController::class, 'showResetForm'])->name('reset');
+Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Auth::routes();
+Route::name('web.')->group(function () {
+    Route::get('/', [WebController::class, 'index'])->name('index');
+    Route::get('/sponsors', [WebController::class, 'sponsors'])->name('sponsors');
+    Route::get('/about-us', [WebController::class, 'about'])->name('about-us');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/tournaments', [ShowTournamentController::class, 'index'])->name('tournaments');
+    Route::get('/tournaments/{tournament}', [ShowTournamentController::class, 'show'])->name('tournament');
+
+    Route::get('posts', [ShowPostController::class, 'index'])->name('posts');
+    Route::get('posts/{post}', [ShowPostController::class, 'show'])->name('post');
+});
+
+Route::prefix('dashboard')->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::resource('tournaments', TournamentController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('players', PlayerController::class);
+});

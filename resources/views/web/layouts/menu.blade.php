@@ -1,23 +1,23 @@
 <li>
-    <a href="{{ route('index') }}">Inicio</a>
+    <a href="{{ route('web.index') }}">Inicio</a>
 </li>
 
 <li class="current">
-    <a href="{{ route('tournaments.index')}}">Torneos</a>
+    <a href="{{ route('web.tournaments')}}">Torneos</a>
     <ul class="sub-current">
         <li>
-            <a href="{{ route('tournaments.show', ['id' => 1])}}">Regional</a>
+            <a href="{{ route('web.tournament', ['tournament' => 1])}}">Regional</a>
         </li>
         <li>
-            <a href="{{ route('tournaments.show', ['id' => 2])}}">Federal</a>
+            <a href="{{ route('web.tournament', ['tournament' => 2])}}">Federal</a>
         </li>
     </ul>
 </li>
 
 <li>
-    <a href="{{ route('sponsors') }}">Auspiciantes</a>
+    <a href="{{ route('web.sponsors') }}">Auspiciantes</a>
 </li>
 
 <li>
-    <a href="{{ route('about-us') }}">Quiénes somos</a>
+    <a href="{{ route('web.about-us') }}">Quiénes somos</a>
 </li>
