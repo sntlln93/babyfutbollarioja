@@ -21,7 +21,7 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::name('web.')->group(['middleware' => 'auth'], function () {
+Route::name('web.')->group(function () {
     Route::get('/', [WebController::class, 'index'])->name('index');
     Route::get('/sponsors', [WebController::class, 'sponsors'])->name('sponsors');
     Route::get('/about-us', [WebController::class, 'about'])->name('about-us');
@@ -33,9 +33,9 @@ Route::name('web.')->group(['middleware' => 'auth'], function () {
     Route::get('posts/{post}', [ShowPostController::class, 'show'])->name('post');
 });
 
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('tournaments', TournamentController::class);
-    Route::resource('categories', CategoryController::class);
+    Route::resource('categories', CategoryController::class)->except('edit', 'update', 'show');
     Route::resource('players', PlayerController::class);
 });

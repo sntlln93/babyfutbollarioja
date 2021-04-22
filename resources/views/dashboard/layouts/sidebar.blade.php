@@ -35,7 +35,7 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('categories.index') }}">
             <i class="fas fa-book-open"></i>
             <span>Categorías</span>
         </a>
