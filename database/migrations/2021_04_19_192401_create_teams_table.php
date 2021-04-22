@@ -16,8 +16,8 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('club_id')->constrained();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('club_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

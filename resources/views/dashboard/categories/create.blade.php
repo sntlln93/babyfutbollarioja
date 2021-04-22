@@ -3,52 +3,36 @@
 @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Modificar torneo</h1>
+        <h1 class="h3 mb-0 text-gray-800">Nueva categoría</h1>
     </div>
 
     <div class="row">
         <div class="col-sm-12 col-md-8 mx-auto">
-            <form action="{{ route('tournaments.update', ['tournament' => $tournament->id]) }}" method="POST" class="needs-validation" novalidate>
+            
+            <form action="{{ route('categories.store') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
-                @method('put')
 
                 <div class="form-row mb-2">
                     <div class="col-sm-12">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control @error('name') invalid-feedback @enderror" value="{{ $tournament->name }}" id="name"
-                            name="name" placeholder="Nombres" value="{{ old('name') }}" required>
+                        <label for="name">Nombre de la categoría</label>
+                        <input type="text" placeholder="Colocá el año en un formato de 4 dígitos. Ej: 2005, 2009, etc"
+                            name="name" class="form-control" value="{{ old('name') }}" required>
                         <span class="invalid-feedback" role="alert">
                             <strong>Este campo es obligatorio</strong>
                         </span>
-                        @error('name')
-                            <span class="text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        @error('name') <small class="text-danger"><strong>{{ $message }}</strong></small> @enderror
                     </div>
                 </div>
 
-                <button class="my-3 btn btn-primary w-100" type="submit">Confirmar modificaciones</button>
+                <button class="my-3 btn btn-primary w-100" type="submit">Guardar categoría</button>
             </form>
         </div>
     </div>
 
 @endsection
 
-@section('styles')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('.my-select').select2();
-        });
-
-    </script>
-
     <script>
         (function() {
             'use strict';

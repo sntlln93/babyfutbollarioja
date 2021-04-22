@@ -20,7 +20,7 @@
                             <strong>Este campo es obligatorio</strong>
                         </span>
                         @error('name')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -30,8 +30,9 @@
                 <div class="form-row mb-2">
                     <div class="col-sm-12">
                         <label for="type_id">Tipo</label>
-                        <select class="custom-select form-control @error('type_id') invalid-feedback @enderror " name="type_id" required>
-                            <option>Indica el tipo de torneo</option>
+                        <select class="custom-select form-control @error('type_id') invalid-feedback @enderror "
+                            name="type_id" required>
+                            <option></option>
                             @foreach ($types as $type)
                                 <option value="{{ $type->id }}" data-subtext="{{ $type->name }}">
                                     {{ $type->name }}</option>
@@ -41,7 +42,7 @@
                             <strong>Este campo es obligatorio</strong>
                         </span>
                         @error('type_id')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -62,7 +63,7 @@
                             <strong>Este campo es obligatorio</strong>
                         </span>
                         @error('categories')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror

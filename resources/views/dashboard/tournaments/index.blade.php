@@ -28,11 +28,6 @@
                             <th>Eliminar</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            {{ $tournaments->links() }}
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forelse ($tournaments as $tournament)
                             <tr>
@@ -69,6 +64,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                {{ $tournaments->links() }}
             </div>
         </div>
     </div>

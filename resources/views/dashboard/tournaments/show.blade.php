@@ -13,8 +13,8 @@
             <h6 class="m-0 font-weight-bold text-primary">Clubes participantes</h6>
         </div>
         <div class="card-body clubs">
-            @foreach($clubs as $club)
-            <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="" class="club-img">
+            @foreach ($clubs as $club)
+                <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="" class="club-img">
             @endforeach
         </div>
     </div>
@@ -36,11 +36,6 @@
                             <th>Ver</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            {{ $games->links() }}
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forelse ($games as $game)
                             <tr>
@@ -63,6 +58,8 @@
                         @endforelse
                     </tbody>
                 </table>
+                {{ $games->links() }}
+
             </div>
         </div>
     </div>

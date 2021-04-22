@@ -13,13 +13,6 @@ use App\Http\Controllers\Controller;
 
 class TournamentController extends Controller
 {
-    private $redirectsTo;
-    
-    public function __construct()
-    {
-        $this->redirectsTo = route('tournaments.index');
-    }
-
     public function index()
     {
         $tournaments = Tournament::paginate(10);
@@ -46,16 +39,18 @@ class TournamentController extends Controller
             'type_id' => 'required'
         ]);
 
-        DB::transaction(function () use ($validatedData) {
+        $tournament = DB::transaction(function () use ($validatedData) {
             $tournament = Tournament::create([
                 'name' => $validatedData['name'],
                 'type_id' => $validatedData['type_id']
             ]);
 
-            $tournament->categories()->sync($validatedData['categories']);
+            return $tournament
+                ->categories()
+                ->sync($validatedData['categories']);
         });
 
-        return redirect($this->redirectsTo);
+        return redirect()->route('tournaments.show', ['tournament' => $tournament->id]);
     }
 
     public function show(Tournament $tournament)
@@ -85,15 +80,13 @@ class TournamentController extends Controller
             'name' => $validatedData['name'],
         ]);
 
-        return redirect($this->redirectsTo);
+        return redirect()->route('tournaments.show', ['tournament' => $tournament->id]);
     }
 
     public function destroy(Tournament $tournament)
     {
-        DB::transaction(function () use ($tournament) {
-            $tournament->delete();
-        });
+        $tournament->delete();
 
-        return redirect($this->redirectsTo);
+        return redirect()->route('tournaments.index');
     }
 }

@@ -17,8 +17,8 @@ class CreatePlayerTeamTable extends Migration
             $table->id();
             $table->boolean('is_active')->default(true);
 
-            $table->foreignId('player_id')->constrained();
-            $table->foreignId('team_id')->constrained();
+            $table->foreignId('player_id')->constrained()->onDelete('cascade');
+            $table->foreignId('team_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
