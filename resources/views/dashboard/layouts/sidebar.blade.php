@@ -11,7 +11,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {{ Str::contains(Route::currentRouteName(), 'home') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('home') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Panel de control</span></a>
@@ -26,7 +26,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item {{ Str::contains(Route::currentRouteName(), 'tournaments') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('tournaments.index') }}">
             <i class="fas fa-trophy"></i>
             <span>Torneos</span>
@@ -34,7 +34,7 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item {{ Str::contains(Route::currentRouteName(), 'categories') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('categories.index') }}">
             <i class="fas fa-book-open"></i>
             <span>Categorías</span>
@@ -50,15 +50,15 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ Str::contains(Route::currentRouteName(), 'clubs') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('clubs.index') }}">
             <i class="fas fa-shield-alt"></i>
             <span>Clubes</span>
         </a>
     </li>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
+    <li class="nav-item {{ Str::contains(Route::currentRouteName(), 'players') ? 'active' : '' }}">
         <a class="nav-link" href="#">
             <i class="fas fa-user"></i>
             <span>Jugadores</span>
@@ -74,7 +74,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item {{ Str::contains(Route::currentRouteName(), 'posts') ? 'active' : '' }}">
         <a class="nav-link" href="#">
             <i class="fas fa-newspaper"></i>
             <span>Baby Sports</span>
