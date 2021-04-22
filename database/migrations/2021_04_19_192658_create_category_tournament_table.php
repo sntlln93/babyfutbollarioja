@@ -16,8 +16,8 @@ class CreateCategoryTournamentTable extends Migration
         Schema::create('category_tournament', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('tournament_id')->constrained();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tournament_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

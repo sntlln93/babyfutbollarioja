@@ -75,7 +75,7 @@
                                <!-- Club Ranking -->
                                <div class="col-lg-4">
                                    <div class="club-ranking">
-                                        <h5><a href="{{ route('tournaments.show', ['id' => 1])}}">Posiciones</a></h5>
+                                        <h5><a href="#">Posiciones</a></h5>
                                         <div class="info-ranking">
                                             <ul>
                                                 <li>
@@ -752,13 +752,14 @@
                             <div class="col-md-4">
                                 <div class="img-hover">
                                    <img src="{{ asset('web/img/blog/1.jpg') }}" alt="" class="img-responsive">
-                                   <div class="overlay"><a href="{{ route('posts.show', ['id' => 1])}}">+</a></div>
+                                   <div class="overlay"><a href="{{ route('web.posts', ['post' => 1])}}">+</a></div>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h5><a href="{{ route('posts.show', ['id' => 1])}}">Lorem Ipsum</a></h5>
+                                <h5><a href="{{ route('web.posts', ['post' => 1])}}">Lorem Ipsum</a></h5>
                                 <span class="data-info">Enero 3, 2014</span>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa a in rem nihil dicta error sapiente dolorum cupiditate cum officia pariatur architecto quam sed illo, velit sunt voluptatem nulla atque!<a href="{{ route('posts.show', ['id' => 1])}}">Leer más [+]</a></p>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa a in rem nihil dicta error sapiente dolorum cupiditate cum officia pariatur architecto quam sed illo, velit sunt voluptatem nulla atque!
+                                <a href="{{ route('web.posts', ['post' => 1])}}">Leer más [+]</a></p>
                             </div>
                        </div>
                     </div>
@@ -770,13 +771,13 @@
                             <div class="col-md-4">
                                 <div class="img-hover">
                                    <img src="{{ asset('web/img/blog/1.jpg') }}" alt="" class="img-responsive">
-                                   <div class="overlay"><a href="{{ route('posts.show', ['id' => 1])}}">+</a></div>
+                                   <div class="overlay"><a href="{{ route('web.posts', ['post' => 1])}}">+</a></div>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h5><a href="{{ route('posts.show', ['id' => 1])}}">Lorem Ipsum</a></h5>
+                                <h5><a href="{{ route('web.posts', ['post' => 1])}}">Lorem Ipsum</a></h5>
                                 <span class="data-info">Enero 9, 2014</span>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa a in rem nihil dicta error sapiente dolorum cupiditate cum officia pariatur architecto quam sed illo, velit sunt voluptatem nulla atque!<a href="{{ route('posts.show', ['id' => 1])}}">Leer más [+]</a></p>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa a in rem nihil dicta error sapiente dolorum cupiditate cum officia pariatur architecto quam sed illo, velit sunt voluptatem nulla atque!<a href="{{ route('web.posts', ['post' => 1])}}">Leer más [+]</a></p>
                             </div>
                        </div>
                     </div>
@@ -800,13 +801,13 @@
                             <div class="col-md-4">
                                 <div class="img-hover">
                                    <img src="{{ asset('web/img/blog/1.jpg') }}" alt="" class="img-responsive">
-                                   <div class="overlay"><a href="{{ route('posts.show', ['id' => 1])}}">+</a></div>
+                                   <div class="overlay"><a href="{{ route('web.posts', ['post' => 1])}}">+</a></div>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h5><a href="{{ route('posts.show', ['id' => 1])}}">Lorem Ipsum</a></h5>
+                                <h5><a href="{{ route('web.posts', ['post' => 1])}}">Lorem Ipsum</a></h5>
                                 <span class="data-info">Enero 4, 2014</span>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa a in rem nihil dicta error sapiente dolorum cupiditate cum officia pariatur architecto quam sed illo, velit sunt voluptatem nulla atque!<a href="{{ route('posts.show', ['id' => 1])}}">Leer más [+]</a></p>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa a in rem nihil dicta error sapiente dolorum cupiditate cum officia pariatur architecto quam sed illo, velit sunt voluptatem nulla atque!<a href="{{ route('web.posts', ['post' => 1])}}">Leer más [+]</a></p>
                             </div>
                        </div>
                     </div>
@@ -818,13 +819,13 @@
                             <div class="col-md-4">
                                 <div class="img-hover">
                                    <img src="{{ asset('web/img/blog/1.jpg') }}" alt="" class="img-responsive">
-                                   <div class="overlay"><a href="{{ route('posts.show', ['id' => 1])}}">+</a></div>
+                                   <div class="overlay"><a href="{{ route('web.posts', ['post' => 1])}}">+</a></div>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h5><a href="{{ route('posts.show', ['id' => 1])}}">Lorem Ipsum</a></h5>
+                                <h5><a href="{{ route('web.posts', ['post' => 1])}}">Lorem Ipsum</a></h5>
                                 <span class="data-info">Enero 8, 2014</span>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa a in rem nihil dicta error sapiente dolorum cupiditate cum officia pariatur architecto quam sed illo, velit sunt voluptatem nulla atque!<a href="{{ route('posts.show', ['id' => 1])}}">Leer más [+]</a></p>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa a in rem nihil dicta error sapiente dolorum cupiditate cum officia pariatur architecto quam sed illo, velit sunt voluptatem nulla atque!<a href="{{ route('web.posts', ['post' => 1])}}">Leer más [+]</a></p>
                             </div>
                        </div>
                     </div>

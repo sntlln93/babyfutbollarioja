@@ -17,8 +17,8 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('type');
 
-            $table->foreignId('game_id')->constrained();
-            $table->foreignId('player_id')->constrained();
+            $table->foreignId('game_id')->constrained()->onDelete('cascade');
+            $table->foreignId('player_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
