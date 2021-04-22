@@ -1,4 +1,4 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion collapse-sm" id="accordionSidebar">
     
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -90,12 +90,12 @@
     </div>
 
     @if(null)
-    <!-- Sidebar Message -->
-    <div class="sidebar-card">
-        <img class="sidebar-card-illustration mb-2" src="{{ asset('dashboard/img/undraw_rocket.svg') }}" alt="">
-        <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-        <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-    </div>
+        <!-- Sidebar Message -->
+        <div class="sidebar-card">
+            <img class="sidebar-card-illustration mb-2" src="{{ asset('dashboard/img/undraw_rocket.svg') }}" alt="">
+            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+        </div>
     @endif
 
 </ul>

@@ -18,15 +18,14 @@ class CreateGamesTable extends Migration
             $table->date('date')->nullable();
             $table->integer('local_score');
             $table->integer('away_score');
-            $table->string('state')->default('PENDIENTE');
 
             $table->unsignedBigInteger('local_id');
             $table->unsignedBigInteger('away_id');
 
-            $table->foreign('local_id')->references('id')->on('teams');
-            $table->foreign('away_id')->references('id')->on('teams');
+            $table->foreign('local_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->foreign('away_id')->references('id')->on('teams')->onDelete('cascade');
 
-            $table->foreignId('tournament_id')->constrained();
+            $table->foreignId('tournament_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
