@@ -21,7 +21,7 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::name('web.')->group(function () {
+Route::name('web.')->group(['middleware' => 'auth'], function () {
     Route::get('/', [WebController::class, 'index'])->name('index');
     Route::get('/sponsors', [WebController::class, 'sponsors'])->name('sponsors');
     Route::get('/about-us', [WebController::class, 'about'])->name('about-us');
