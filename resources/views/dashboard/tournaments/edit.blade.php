@@ -21,7 +21,7 @@
                             <strong>Este campo es obligatorio</strong>
                         </span>
                         @error('name')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
