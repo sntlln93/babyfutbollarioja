@@ -2,15 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Dashboard\ClubController;
 use App\Http\Controllers\Web\WebController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Web\ShowPostController;
-use App\Http\Controllers\Web\ShowTournamentController;
-
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\PlayerController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Web\ShowTournamentController;
 use App\Http\Controllers\Dashboard\TournamentController;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -37,5 +37,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('tournaments', TournamentController::class);
     Route::resource('categories', CategoryController::class)->except('edit', 'update', 'show');
+    Route::resource('clubs', ClubController::class);
     Route::resource('players', PlayerController::class);
 });
