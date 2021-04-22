@@ -2,10 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Model;
 
 class Club extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+
+    public function teams(){
+        return $this->hasMany(Team::class);
+    }
+
+    public function phone(){
+        return $this->morphOne(Phone::class, 'phoneable');
+    }
+
+    public function image(){
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }
