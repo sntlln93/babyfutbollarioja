@@ -59,7 +59,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item {{ Str::contains(Route::currentRouteName(), 'players') ? 'active' : '' }}">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('players.index') }}">
             <i class="fas fa-user"></i>
             <span>Jugadores</span>
         </a>
