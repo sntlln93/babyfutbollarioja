@@ -33,8 +33,11 @@
                             <tr>
                                 <td>{{ $club->name }}</td>
                                 <td>{{ $club->field_description }}</td>
-                                <td><i class="fas fa-phone-alt"></i><a
-                                        href="tel:+54{{ $club->phone->full_number }}">{{ $club->phone->full_number }}</a>
+                                <td>
+                                    @if ($club->phone)
+                                        <i class="fas fa-phone-alt"></i><a
+                                            href="tel:+54{{ $club->phone->full_number }}">{{ $club->phone->full_number }}</a>
+                                    @endif
                                 </td>
                                 <td>{{ $club->created_at->diffForHumans() }}</td>
                                 <td>{{ $club->updated_at->diffForHumans() }}</td>
