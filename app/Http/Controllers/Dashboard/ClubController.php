@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Club;
-use App\Models\Team;
 use App\Models\Image;
 use App\Models\Phone;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Services\CreateImageService;
+use App\Services\CreatePhoneService;
+use App\Services\CreateTeamsFromClubService;
 
 class ClubController extends Controller
 {
@@ -51,28 +52,10 @@ class ClubController extends Controller
                 'name' => $validatedClub['name'],
                 'field_description' => $validatedClub['field_description'],
             ]);
-
-            Image::create([
-                'path' => $validatedClub['shield']->store('clubs', 'public'),
-                'imageable_id' => $club->id,
-                'imageable_type' => Club::class
-            ]);
-
-            $categories = Category::where('is_active', true)->pluck('id');
-
-            foreach ($categories as $category) {
-                Team::create([
-                    'club_id' => $club->id,
-                    'category_id' => $category
-                ]);
-            }
-
-            Phone::create([
-                'area_code' => $validatedClub['area_code'],
-                'number' => $validatedClub['number'],
-                'phoneable_id' => $club->id,
-                'phoneable_type' => Club::class
-            ]);
+            
+            (new CreateImageService)->create($club, $validatedClub['shield']);
+            (new CreateTeamsFromClubService)->create($club->id);
+            (new CreatePhoneService)->create($club, $validatedClub['area_code'], $validatedClub['number']);
         });
 
         return redirect()->route('clubs.index');
