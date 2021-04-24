@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Web\ShowTournamentController;
 use App\Http\Controllers\Dashboard\TournamentController;
+use App\Http\Controllers\Dashboard\FetchCategoriesFromBornDateController;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -39,4 +40,5 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class)->except('edit', 'update', 'show');
     Route::resource('clubs', ClubController::class);
     Route::resource('players', PlayerController::class);
+    Route::post('players-category', [FetchCategoriesFromBornDateController::class, 'get']);
 });

@@ -2,10 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
-    use HasFactory;
+    public function local()
+    {
+        return $this->belongsTo(Team::class, 'local_id');
+    }
+
+    public function away()
+    {
+        return $this->belongsTo(Team::class, 'away_id');
+    }
+
+    public function tournament()
+    {
+        return $this->belongsTo(Tournament::class);
+    }
 }
