@@ -43,23 +43,20 @@
                                 <td class="text-center">
                                     <a href="{{ route('tournaments.edit', ['tournament' => $tournament->id]) }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('tournaments.show', ['tournament' => $tournament->id]) }}"
-                                            class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                        </td>
-                                    <td class="text-center">
-                                        
-                                    <form action="{{ route('tournaments.destroy', ['tournament' => $tournament->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('tournaments.show', ['tournament' => $tournament->id]) }}"
+                                        class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    @include('dashboard._partials.delete_button', ['id' => $tournament->id, 'prefix' =>
+                                    'tournament'])
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                Aún no hay torneos guardados. ¡Inicia la temporada desde el botón de la esquina superior derecha!
+                                Aún no hay torneos guardados. ¡Inicia la temporada desde el botón de la esquina superior
+                                derecha!
                             </tr>
                         @endforelse
                     </tbody>

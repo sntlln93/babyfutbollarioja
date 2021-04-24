@@ -33,12 +33,8 @@
                                 <td>{{ $category->created_at->diffForHumans() }}</td>
                                 <td>{{ $category->updated_at->diffForHumans() }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('categories.destroy', ['category' => $category->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
+                                    @include('dashboard._partials.delete_button', ['id' => $category->id, 'prefix' =>
+                                    'category'])
                                 </td>
                             </tr>
                         @empty

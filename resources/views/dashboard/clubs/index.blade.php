@@ -50,12 +50,9 @@
                                             class="fas fa-eye"></i></a>
                                 </td>
                                 <td class="text-center">
-
-                                    <form action="{{ route('clubs.destroy', ['club' => $club->id]) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
+                                    @include('dashboard._partials.delete_button', ['id' => $club->id, 'prefix' =>
+                                    'club'])
+                                </td>
                             </tr>
                         @empty
                             <tr>
