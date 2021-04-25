@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Game;
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Tournament extends Model
@@ -23,10 +21,5 @@ class Tournament extends Model
     public function type()
     {
         return $this->belongsTo(Type::class);
-    }
-
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
     }
 }
