@@ -75,7 +75,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item {{ Str::contains(Route::currentRouteName(), 'posts') ? 'active' : '' }}">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('posts.index') }}">
             <i class="fas fa-newspaper"></i>
             <span>Baby Sports</span>
         </a>
