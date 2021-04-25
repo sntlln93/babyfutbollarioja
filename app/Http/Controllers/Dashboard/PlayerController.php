@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\CreateImageService;
+use App\Services\DeleteImageFromDiskService;
 
 class PlayerController extends Controller
 {
@@ -84,6 +85,7 @@ class PlayerController extends Controller
     public function destroy(Player $player)
     {
         DB::transaction(function () use ($player) {
+            (new DeleteImageFromDiskService)->delete($player->image->path);
             $player->image->delete();
             $player->teams()->detach();
             $player->delete();

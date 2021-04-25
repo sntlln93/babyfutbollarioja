@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Dashboard\ClubController;
 use App\Http\Controllers\Web\WebController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Web\ShowPostController;
+use App\Http\Controllers\Dashboard\ClubController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\PlayerController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
@@ -40,5 +41,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class)->except('edit', 'update', 'show');
     Route::resource('clubs', ClubController::class);
     Route::resource('players', PlayerController::class);
+    Route::resource('posts', PostController::class);
     Route::post('players-category', [FetchCategoriesFromBornDateController::class, 'get']);
 });

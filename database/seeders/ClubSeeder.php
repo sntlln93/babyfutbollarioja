@@ -31,6 +31,6 @@ class ClubSeeder extends Seeder
         ]);
 
         (new CreateTeamsFromClubService)->create($club->id);
-        (new CreatePhoneService)->create($club, Club::class, '351', '7891608');
+        (new CreatePhoneService)->create($club, '351', '7891608');
     }
 }

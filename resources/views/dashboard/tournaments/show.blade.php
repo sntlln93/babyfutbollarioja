@@ -48,7 +48,7 @@
                                     <a href="#" class="btn btn-primary"><i class="fas fa-futbol"></i></a>
                                 </td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
                                 </td>
                             </tr>
                         @empty

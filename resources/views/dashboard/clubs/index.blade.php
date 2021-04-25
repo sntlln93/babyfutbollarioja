@@ -42,11 +42,11 @@
                                 <td>{{ $club->created_at->diffForHumans() }}</td>
                                 <td>{{ $club->updated_at->diffForHumans() }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('clubs.edit', ['club' => $club->id]) }}" class="btn btn-warning"><i
+                                    <a href="{{ route('clubs.edit', ['club' => $club->id]) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('clubs.show', ['club' => $club->id]) }}" class="btn btn-info"><i
+                                    <a href="{{ route('clubs.show', ['club' => $club->id]) }}" class="btn btn-sm btn-info"><i
                                             class="fas fa-eye"></i></a>
                                 </td>
                                 <td class="text-center">

@@ -38,11 +38,11 @@
                                 <td>{{ $player->updated_at->diffForHumans() }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('players.edit', ['player' => $player->id]) }}"
-                                        class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                        class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('players.show', ['player' => $player->id]) }}"
-                                        class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                        class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td class="text-center">
                                     @include('dashboard._partials.delete_button', ['id' => $player->id, 'prefix' =>
