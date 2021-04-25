@@ -10,6 +10,7 @@ use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Services\CreateImageService;
 
 class TournamentController extends Controller
 {
@@ -36,21 +37,24 @@ class TournamentController extends Controller
             'name' => 'required',
             'categories' => 'required',
             'categories.*' => 'required',
-            'type_id' => 'required'
+            'type_id' => 'required',
+            'photo' => 'required|mimes:jpg,jpeg'
         ]);
 
-        $tournament = DB::transaction(function () use ($validatedData) {
+        DB::transaction(function () use ($validatedData) {
             $tournament = Tournament::create([
                 'name' => $validatedData['name'],
                 'type_id' => $validatedData['type_id']
             ]);
+
+            (new CreateImageService)->create($tournament, $validatedData['photo']);
 
             return $tournament
                 ->categories()
                 ->sync($validatedData['categories']);
         });
 
-        return redirect()->route('tournaments.show', ['tournament' => $tournament->id]);
+        return redirect()->route('tournaments.index');
     }
 
     public function show(Tournament $tournament)
