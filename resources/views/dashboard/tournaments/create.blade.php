@@ -8,8 +8,7 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-8 mx-auto">
-            <form action="{{ route('tournaments.store') }}" method="POST" class="needs-validation"
-                enctype="multipart/form-data" novalidate>
+            <form action="{{ route('tournaments.store') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
 
                 <div class="form-row mb-2">
@@ -71,28 +70,6 @@
                     </div>
                 </div>
 
-                <div class="form-row mb-2">
-                    <div class="col-sm-12">
-                        <label for="photo">Foto</label>
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" name="photo"
-                                    class="custom-file-input @error('photo') border-danger @enderror" id="shield" required>
-                                <label id="file_inner" class="custom-file-label" for="photo">Elegí una foto. Ésta se
-                                    mostrará en la página web y funcionara como foto de portada o presentación del
-                                    torneo</label>
-                            </div>
-                        </div>
-                        <span class="invalid-feedback" role="alert">
-                            <strong>Este campo es obligatorio</strong>
-                        </span>
-                        @error('photo')
-                            <span class="text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
 
                 <button class="my-3 btn btn-primary w-100" type="submit">Guardar torneo</button>
             </form>
