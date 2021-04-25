@@ -25,7 +25,8 @@ class Tournament extends Model
         return $this->belongsTo(Type::class);
     }
 
-    public function image(){
+    public function image()
+    {
         return $this->morphOne(Image::class, 'imageable');
     }
 }
