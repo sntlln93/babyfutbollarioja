@@ -42,11 +42,11 @@
                                 <td>{{ $tournament->updated_at->diffForHumans() }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('tournaments.edit', ['tournament' => $tournament->id]) }}"
-                                        class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                        class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('tournaments.show', ['tournament' => $tournament->id]) }}"
-                                        class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                        class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td class="text-center">
                                     @include('dashboard._partials.delete_button', ['id' => $tournament->id, 'prefix' =>

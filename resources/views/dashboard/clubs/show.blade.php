@@ -20,7 +20,6 @@
                             <th>Creado</th>
                             <th>Jugadores</th>
                             <th>Ver</th>
-                            <th>Modificar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,13 +31,10 @@
                                 <td class="text-center">
                                     <a href="#" class="btn btn-primary"><i class="fas fa-futbol"></i></a>
                                 </td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7">Este torneo aún no tiene partidos.</td>
+                                <td colspan="7">Este club aún no tiene equipos.</td>
                             </tr>
                         @endforelse
                     </tbody>
