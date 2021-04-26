@@ -51,7 +51,7 @@
         <div class="dark-home">
             <div class="container">
                 <div class="row">
-                    <!-- Left Content - Tabs and Carousel -->
+                    {{-- <!-- Left Content - Tabs and Carousel -->
                     @if ($tournament)
                         @if ($tournament->games)
 
@@ -695,7 +695,7 @@
                             </div>
                         @endif
                     @endif
-                    <!-- Left Content - Tabs and Carousel -->
+                    <!-- Left Content - Tabs and Carousel --> --}}
 
                     <!-- Right Content - Content Counter -->
                     <div class="col-xl-3 col-md-12">
