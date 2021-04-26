@@ -27,7 +27,9 @@
                                 <h1>{{ $tournament->name }} 2021</h1>
                                 <p>Jugá con nosotros, nos jugamos por vos.</p>
                                 <div class="clubs">
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    @foreach ($clubs as $club)
+                                        <img src="{{ asset('storage/' . $club->image->path) }}" alt="">
+                                    @endforeach
 
                                 </div>
                             </div>
