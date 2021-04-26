@@ -695,14 +695,14 @@
                             </div>
                         @endif
                     @endif
-                    <!-- Left Content - Tabs and Carousel --> --}}
+                    <!-- Left Content - Tabs and Carousel --> 
 
                     <!-- Right Content - Content Counter -->
                     <div class="col-xl-3 col-md-12">
                         <img src="{{ asset('chilecito_v.png') }}" alt="" class="img-hover">
                         <!-- Content Counter -->
                     </div>
-                    <!-- End Right Content - Content Counter -->
+                    <!-- End Right Content - Content Counter --> --}}
                 </div>
             </div>
         </div>
