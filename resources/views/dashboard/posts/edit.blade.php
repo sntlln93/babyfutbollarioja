@@ -27,8 +27,8 @@
                                     reemplazar ésta. Este campo es opcional</label>
                             </div>
                         </div>
-                        @if($post->image)
-                        <img src="{{ asset('storage/' . $post->image->path) }}" alt="">
+                        @if ($post->image)
+                            <img src="{{ asset('storage/' . $post->image->path) }}" alt="">
                         @endif
                         @error('photo')
                             <span class="text-danger" role="alert">
