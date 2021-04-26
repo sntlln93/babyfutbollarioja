@@ -15,8 +15,8 @@
                     <div class="card-header d-flex flex-row justify-content-between">
                         <strong>{{ Str::limit($post->title, 30) }}</strong>
                         <div class="d-flex flex-row">
-                            <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn mr-1 btn-sm btn-warning"><i
-                                    class="fas fa-edit"></i></a>
+                            <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                class="btn mr-1 btn-sm btn-warning"><i class="fas fa-edit"></i></a>
                             @include('dashboard._partials.delete_button', ['id' => $post->id, 'prefix' => 'post'])
                         </div>
 
@@ -27,7 +27,9 @@
                                 {{ $post->created_at->diffForHumans() }}</i>
                         </p>
                         <div class="d-flex justify-content-around">
-                            <img class="post--image" src="{{ asset('storage/' . $post->image->path) }}" alt="">
+                            @if ($post->image)
+                                <img class="post--image" src="{{ asset('storage/' . $post->image->path) }}" alt="">
+                            @endif
                         </div>
                         {{ Str::limit($post->body, 500) }}
                     </div>
