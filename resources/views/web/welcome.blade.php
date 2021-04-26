@@ -774,12 +774,14 @@
                             <div class="post-item">
                                 <div class="row">
                                     <div class="col-md-4">
+                                        @if($post->image)
                                         <div class="img-hover">
                                             <img src="{{ asset('storage/' . $post->image->path) }}" alt=""
                                                 class="img-responsive">
                                             <div class="overlay"><a href="{{ route('web.posts', ['post' => 1]) }}">+</a>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                     <div class="col-md-8">
                                         <h5><a href="{{ route('web.posts', ['post' => 1]) }}">{{ $post->title }}</a>
