@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\Post;
+use App\Models\Tournament;
 use App\Http\Controllers\Controller;
 
 class WebController extends Controller
 {
-    public function index(){
-        return view('web.welcome');
+    public function index()
+    {
+        $tournament = Tournament::where('is_active', true)->first();
+        $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
+
+        return view('web.welcome')
+            ->with('tournament', $tournament)
+            ->with('posts', $posts);
     }
 
-    public function about(){
+    public function about()
+    {
         return view('web.about-us');
     }
 
-    public function sponsors(){
+    public function sponsors()
+    {
         return view('web.sponsors');
     }
 }
