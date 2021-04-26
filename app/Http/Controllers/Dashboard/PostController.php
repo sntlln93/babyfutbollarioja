@@ -38,7 +38,9 @@ class PostController extends Controller
                 'created_by' => auth()->user()->id
             ]);
 
-            (new CreateImageService)->create($post, $validatedPost['photo']);
+            if (array_key_exists('photo', $validatedPost)) {
+                (new CreateImageService)->create($post, $validatedPost['photo']);
+            }
         });
 
         return redirect()->route('posts.index');
