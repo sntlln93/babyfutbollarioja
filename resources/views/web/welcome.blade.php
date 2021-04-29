@@ -773,8 +773,8 @@
                         @foreach ($posts as $post)
                             <div class="post-item">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        @if ($post->image()->exists()))
+                                    @if ($post->image()->exists()))
+                                        <div class="col-md-4">
                                             <div class="img-hover">
                                                 <img src="{{ asset('storage/' . $post->image->path) }}" alt=""
                                                     class="img-responsive">
@@ -782,118 +782,120 @@
                                                         href="{{ route('web.posts', ['post' => 1]) }}">+</a>
                                                 </div>
                                             </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h5><a href="{{ route('web.posts', ['post' => 1]) }}">{{ $post->title }}</a>
-                                        </h5>
-                                        <span class="data-info">{{ $post->author->full_name }}.
-                                            {{ $post->created_at->diffForHumans() }}</span>
-                                        <p>{{ $post->body }}
-                                            <a href="{{ route('web.posts', ['post' => 1]) }}">Leer más [+]</a>
-                                        </p>
-                                    </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                        @else
+                                            <div class="col-sm-12">
+                                    @endif
+                                    <h5><a href="{{ route('web.posts', ['post' => 1]) }}">{{ $post->title }}</a>
+                                    </h5>
+                                    <span class="data-info">{{ $post->author->full_name }}.
+                                        {{ $post->created_at->diffForHumans() }}</span>
+                                    <p>{{ $post->body }}
+                                        <a href="{{ route('web.posts', ['post' => 1]) }}">Leer más [+]</a>
+                                    </p>
                                 </div>
                             </div>
-                        @endforeach
-                        <!-- End Post Item -->
                     </div>
-                    <!-- End Recent Post -->
+                    @endforeach
+                    <!-- End Post Item -->
                 </div>
-                <!-- End content Left -->
-
-                <!-- content Sidebar Right -->
-                <aside class="col-sm-6 col-lg-3 col-xl-2">
-                    <!-- Diary -->
-                    <div class="panel-box">
-                        <div class="titles">
-                            <h4><i class="fa fa-calendar"></i>Calendario</h4>
-                        </div>
-
-                        <!-- List Diary -->
-                        <ul class="list-diary">
-                            <!-- Item List Diary -->
-                            <li>
-                                <h6>GROUP A <span>14 JUN 2018 - 18:00</span></h6>
-                                <ul class="club-logo">
-                                    <li>
-                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                        <span>RUSSIA</span>
-                                    </li>
-                                    <li>
-                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                        <span>SAUDI ARABIA</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End Item List Diary -->
-
-                            <!-- Item List Diary -->
-                            <li>
-                                <h6>GROUP E <span>22 JUN 2018 - 15:00</span></h6>
-                                <ul class="club-logo">
-                                    <li>
-                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                        <span>BRAZIL</span>
-                                    </li>
-                                    <li>
-                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                        <span>COSTA RICA</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End Item List Diary -->
-
-                            <!-- Item List Diary -->
-                            <li>
-                                <h6>GROUP H <span>19 JUN 2018 - 15:00</span></h6>
-                                <ul class="club-logo">
-                                    <li>
-                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                        <span>COLOMBIA</span>
-                                    </li>
-                                    <li>
-                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                        <span>JAPAN</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End Item List Diary -->
-
-                            <!-- Item List Diary -->
-                            <li>
-                                <h6>GROUP C <span>16 JUN 2018 - 15:00</span></h6>
-                                <ul class="club-logo">
-                                    <li>
-                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                        <span>FRANCE</span>
-                                    </li>
-                                    <li>
-                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                        <span>AUSTRALIA</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End Item List Diary -->
-                        </ul>
-                        <!-- End List Diary -->
-                    </div>
-                    <!-- End Diary -->
-
-                    <!-- Adds Sidebar -->
-                    <div class="panel-box">
-                        <div class="titles no-margin">
-                            <h4><i class="fa fa-link"></i>Auspiciante</h4>
-                        </div>
-                        <a href="http://themeforest.net/user/iwthemes/portfolio?ref=iwthemes" target="_blank">
-                            <img src="{{ asset('web/img/adds/sidebar.png') }}" class="img-responsive" alt="">
-                        </a>
-                    </div>
-                    <!-- End Adds Sidebar -->
-                </aside>
-                <!-- End content Sidebar Right -->
-
+                <!-- End Recent Post -->
             </div>
+            <!-- End content Left -->
+
+            <!-- content Sidebar Right -->
+            <aside class="col-sm-6 col-lg-3 col-xl-2">
+                <!-- Diary -->
+                <div class="panel-box">
+                    <div class="titles">
+                        <h4><i class="fa fa-calendar"></i>Calendario</h4>
+                    </div>
+
+                    <!-- List Diary -->
+                    <ul class="list-diary">
+                        <!-- Item List Diary -->
+                        <li>
+                            <h6>GROUP A <span>14 JUN 2018 - 18:00</span></h6>
+                            <ul class="club-logo">
+                                <li>
+                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    <span>RUSSIA</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    <span>SAUDI ARABIA</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End Item List Diary -->
+
+                        <!-- Item List Diary -->
+                        <li>
+                            <h6>GROUP E <span>22 JUN 2018 - 15:00</span></h6>
+                            <ul class="club-logo">
+                                <li>
+                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    <span>BRAZIL</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    <span>COSTA RICA</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End Item List Diary -->
+
+                        <!-- Item List Diary -->
+                        <li>
+                            <h6>GROUP H <span>19 JUN 2018 - 15:00</span></h6>
+                            <ul class="club-logo">
+                                <li>
+                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    <span>COLOMBIA</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    <span>JAPAN</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End Item List Diary -->
+
+                        <!-- Item List Diary -->
+                        <li>
+                            <h6>GROUP C <span>16 JUN 2018 - 15:00</span></h6>
+                            <ul class="club-logo">
+                                <li>
+                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    <span>FRANCE</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                    <span>AUSTRALIA</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End Item List Diary -->
+                    </ul>
+                    <!-- End List Diary -->
+                </div>
+                <!-- End Diary -->
+
+                <!-- Adds Sidebar -->
+                <div class="panel-box">
+                    <div class="titles no-margin">
+                        <h4><i class="fa fa-link"></i>Auspiciante</h4>
+                    </div>
+                    <a href="http://themeforest.net/user/iwthemes/portfolio?ref=iwthemes" target="_blank">
+                        <img src="{{ asset('web/img/adds/sidebar.png') }}" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <!-- End Adds Sidebar -->
+            </aside>
+            <!-- End content Sidebar Right -->
+
+        </div>
         </div>
         <!-- End Content Central -->
 
