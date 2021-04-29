@@ -10,6 +10,7 @@
         .clubs>img {
             width: auto;
             height: 4rem;
+            margin: 1em;
         }
 
     </style>
