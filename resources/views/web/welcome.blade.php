@@ -721,43 +721,11 @@
                             <h4>Auspiciante</h4>
                         </div>
                         <!-- Locations Carousel -->
-                        <div style="background: red; width: 100%; height: 300px;"></div>
+                        <img src="{{ asset('img/sponsors/aleua.jpg') }}"
+                            style="background: red; width: 100%; height: auto;" />
                         <!-- Locations Carousel -->
                     </div>
                     <!-- End Locations -->
-
-                    <!-- Video presentation -->
-                    <div class="panel-box">
-                        <div class="titles no-margin">
-                            <h4>Auspiciante</h4>
-                        </div>
-                        <!-- Locations Video -->
-                        <div class="row">
-                            <iframe src="https://www.youtube.com/embed/AfOlAUd7u4o" class="video"></iframe>
-                            <div class="info-panel">
-                                <h4>Lorem Ipsum</h4>
-                                <p>Lorem ipsum dolor sit amet, sit amet, consectetur adipisicing elit, elit, incididunt ut
-                                    labore et dolore magna aliqua sit amet, consectetur adipisicing elit,</p>
-                            </div>
-                        </div>
-                        <!-- End Locations Video -->
-                    </div>
-                    <!-- End Video presentation-->
-
-                    <!-- Widget img-->
-                    <div class="panel-box">
-                        <div class="titles no-margin">
-                            <h4>Auspiciante</h4>
-                        </div>
-                        <img src="{{ asset('web/img/slide/1.jpg') }}" alt="">
-                        <div class="row">
-                            <div class="info-panel">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, ut sit amet, consectetur
-                                    adipisicing elit, labore et dolore.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Widget img-->
                 </aside>
                 <!-- End content Sidebar Center -->
 
@@ -807,89 +775,91 @@
 
             <!-- content Sidebar Right -->
             <aside class="col-sm-6 col-lg-3 col-xl-2">
-                <!-- Diary -->
-                <div class="panel-box">
-                    <div class="titles">
-                        <h4><i class="fa fa-calendar"></i>Calendario</h4>
+                @if ($tournament->games()->count())
+                    <!-- Diary -->
+                    <div class="panel-box">
+                        <div class="titles">
+                            <h4><i class="fa fa-calendar"></i>Calendario</h4>
+                        </div>
+
+                        <!-- List Diary -->
+                        <ul class="list-diary">
+                            <!-- Item List Diary -->
+                            <li>
+                                <h6>GROUP A <span>14 JUN 2018 - 18:00</span></h6>
+                                <ul class="club-logo">
+                                    <li>
+                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                        <span>RUSSIA</span>
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                        <span>SAUDI ARABIA</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- End Item List Diary -->
+
+                            <!-- Item List Diary -->
+                            <li>
+                                <h6>GROUP E <span>22 JUN 2018 - 15:00</span></h6>
+                                <ul class="club-logo">
+                                    <li>
+                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                        <span>BRAZIL</span>
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                        <span>COSTA RICA</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- End Item List Diary -->
+
+                            <!-- Item List Diary -->
+                            <li>
+                                <h6>GROUP H <span>19 JUN 2018 - 15:00</span></h6>
+                                <ul class="club-logo">
+                                    <li>
+                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                        <span>COLOMBIA</span>
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                        <span>JAPAN</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- End Item List Diary -->
+
+                            <!-- Item List Diary -->
+                            <li>
+                                <h6>GROUP C <span>16 JUN 2018 - 15:00</span></h6>
+                                <ul class="club-logo">
+                                    <li>
+                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                        <span>FRANCE</span>
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
+                                        <span>AUSTRALIA</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- End Item List Diary -->
+                        </ul>
+                        <!-- End List Diary -->
                     </div>
-
-                    <!-- List Diary -->
-                    <ul class="list-diary">
-                        <!-- Item List Diary -->
-                        <li>
-                            <h6>GROUP A <span>14 JUN 2018 - 18:00</span></h6>
-                            <ul class="club-logo">
-                                <li>
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                    <span>RUSSIA</span>
-                                </li>
-                                <li>
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                    <span>SAUDI ARABIA</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- End Item List Diary -->
-
-                        <!-- Item List Diary -->
-                        <li>
-                            <h6>GROUP E <span>22 JUN 2018 - 15:00</span></h6>
-                            <ul class="club-logo">
-                                <li>
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                    <span>BRAZIL</span>
-                                </li>
-                                <li>
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                    <span>COSTA RICA</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- End Item List Diary -->
-
-                        <!-- Item List Diary -->
-                        <li>
-                            <h6>GROUP H <span>19 JUN 2018 - 15:00</span></h6>
-                            <ul class="club-logo">
-                                <li>
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                    <span>COLOMBIA</span>
-                                </li>
-                                <li>
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                    <span>JAPAN</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- End Item List Diary -->
-
-                        <!-- Item List Diary -->
-                        <li>
-                            <h6>GROUP C <span>16 JUN 2018 - 15:00</span></h6>
-                            <ul class="club-logo">
-                                <li>
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                    <span>FRANCE</span>
-                                </li>
-                                <li>
-                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                    <span>AUSTRALIA</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- End Item List Diary -->
-                    </ul>
-                    <!-- End List Diary -->
-                </div>
-                <!-- End Diary -->
+                    <!-- End Diary -->
+                @endif
 
                 <!-- Adds Sidebar -->
                 <div class="panel-box">
                     <div class="titles no-margin">
                         <h4><i class="fa fa-link"></i>Auspiciante</h4>
                     </div>
-                    <a href="http://themeforest.net/user/iwthemes/portfolio?ref=iwthemes" target="_blank">
-                        <img src="{{ asset('web/img/adds/sidebar.png') }}" class="img-responsive" alt="">
+                    <a href="https://www.instagram.com/distritolr/" target="_blank">
+                        <img src="{{ asset('img/sponsors/distritolr.jpg') }}" class="img-responsive" alt="">
                     </a>
                 </div>
                 <!-- End Adds Sidebar -->

@@ -19,13 +19,9 @@
        
         <!--End Sponsors CLub -->
 
-        <ul class="d-flex flex-wrap list-unstyled">
-            <li class="col-md-4"><a href="#"><img src="{{ asset('web/img/sponsors/1.png') }}" alt=""></a></li>
-            <li class="col-md-4"><a href="#"><img src="{{ asset('web/img/sponsors/2.png') }}" alt=""></a></li>
-            <li class="col-md-4"><a href="#"><img src="{{ asset('web/img/sponsors/3.png') }}" alt=""></a></li>
-            <li class="col-md-4"><a href="#"><img src="{{ asset('web/img/sponsors/4.png') }}" alt=""></a></li>
-            <li class="col-md-4"><a href="#"><img src="{{ asset('web/img/sponsors/5.png') }}" alt=""></a></li>
-            <li class="col-md-4"><a href="#"><img src="{{ asset('web/img/sponsors/3.png') }}" alt=""></a></li>
+        <ul class="d-flex flex-wrap justify-content-around align-items-center list-unstyled">
+            <li class="col-md-3"><a href="#"><img class="w-75" src="{{ asset('web/img/sponsors/distritolr.svg') }}" alt=""></a></li>
+            <li class="col-md-3"><a href="#"><img class="w-75" src="{{ asset('web/img/sponsors/aleua.svg') }}" alt=""></a></li>
         </ul>
 
     </div>
