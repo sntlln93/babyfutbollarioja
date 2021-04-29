@@ -742,7 +742,7 @@
                         @foreach ($posts as $post)
                             <div class="post-item">
                                 <div class="row">
-                                    @if ($post->image()->exists()))
+                                    @if ($post->image()->exists())
                                         <div class="col-md-4">
                                             <div class="img-hover">
                                                 <img src="{{ asset('storage/' . $post->image->path) }}" alt=""
