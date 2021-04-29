@@ -718,7 +718,7 @@
                     <!-- Locations -->
                     <div class="panel-box">
                         <div class="titles no-margin">
-                            <h4>Auspiciante</h4>
+                            <h4>Sponsor</h4>
                         </div>
                         <!-- Locations Carousel -->
                         <img src="{{ asset('img/sponsors/aleua.jpg') }}"
@@ -856,7 +856,7 @@
                 <!-- Adds Sidebar -->
                 <div class="panel-box">
                     <div class="titles no-margin">
-                        <h4><i class="fa fa-link"></i>Auspiciante</h4>
+                        <h4></i>Sponsor</h4>
                     </div>
                     <a href="https://www.instagram.com/distritolr/" target="_blank">
                         <img src="{{ asset('img/sponsors/distritolr.jpg') }}" class="img-responsive" alt="">
