@@ -9,7 +9,7 @@
 
         .clubs>img {
             width: auto;
-            height: 5rem;
+            height: 4rem;
         }
 
     </style>
