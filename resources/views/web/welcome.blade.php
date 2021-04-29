@@ -857,7 +857,7 @@
                             <h4></i>Sponsor</h4>
                         </div>
                         <a href="https://www.instagram.com/distritolr/" target="_blank">
-                            <img src="{{ asset('img/sponsors/distritolr.jpg') }}" class="img-responsive" alt="">
+                            <img src="{{ asset('img/sponsors/distritolr.png') }}" class="img-responsive" alt="">
                         </a>
                     </div>
                     <!-- End Adds Sidebar -->
