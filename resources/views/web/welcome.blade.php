@@ -742,26 +742,29 @@
                         @foreach ($posts as $post)
                             <div class="post-item">
                                 <div class="row">
-                                    @if ($post->image()->exists())
-                                        <div class="col-md-4">
-                                            <div class="img-hover">
-                                                <img src="{{ asset('storage/' . $post->image->path) }}" alt=""
-                                                    class="img-responsive">
-                                                <div class="overlay"><a
-                                                        href="{{ route('web.posts', ['post' => 1]) }}">+</a>
+                                    <h5><a href="{{ route('web.posts', ['post' => 1]) }}">{{ $post->title }}</a>
+
+                                        @if ($post->image()->exists())
+                                            <div class="col-md-4">
+                                                <div class="img-hover">
+                                                    <img src="{{ asset('storage/' . $post->image->path) }}" alt=""
+                                                        class="img-responsive">
+                                                    <div class="overlay"><a
+                                                            href="{{ route('web.posts', ['post' => 1]) }}">+</a>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        @endif
+                                        <div class="{{ $post->image()->exists() ? 'col-md-8' : 'col' }}">
+                                            <h5><a
+                                                    href="{{ route('web.posts', ['post' => 1]) }}">{{ $post->title }}</a>
+                                            </h5>
+                                            <span class="data-info">{{ $post->author->full_name }}.
+                                                {{ $post->created_at->diffForHumans() }}</span>
+                                            <p>{{ $post->body }}
+                                                <a href="{{ route('web.posts', ['post' => 1]) }}">Leer más [+]</a>
+                                            </p>
                                         </div>
-                                    @endif
-                                    <div class="{{ $post->image()->exists() ? 'col-md-8' : 'col' }}">
-                                        <h5><a href="{{ route('web.posts', ['post' => 1]) }}">{{ $post->title }}</a>
-                                        </h5>
-                                        <span class="data-info">{{ $post->author->full_name }}.
-                                            {{ $post->created_at->diffForHumans() }}</span>
-                                        <p>{{ $post->body }}
-                                            <a href="{{ route('web.posts', ['post' => 1]) }}">Leer más [+]</a>
-                                        </p>
-                                    </div>
                                 </div>
                             </div>
                         @endforeach
