@@ -8,8 +8,8 @@
         }
 
         .clubs>img {
-            width: 50px;
-            height: 50px;
+            width: auto;
+            height: 1rem;
         }
 
     </style>
