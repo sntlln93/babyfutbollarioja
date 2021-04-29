@@ -774,7 +774,7 @@
                             <div class="post-item">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        @if ($post->image->path)
+                                        @if ($post->image()->exists()))
                                             <div class="img-hover">
                                                 <img src="{{ asset('storage/' . $post->image->path) }}" alt=""
                                                     class="img-responsive">
