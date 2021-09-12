@@ -4,6 +4,7 @@
 <style>
     .post__body {
         columns: 3 250px;
+        margin-bottom: 5rem;
     }
 
     .post__body img {
@@ -23,7 +24,9 @@
                     <p>{{ $post->author->full_name }}, {{ $post->created_at->diffForHumans() }}</p>
                 </div>
                 <div class="post__body">
+                    @if($post->image)
                     <img src="{{ asset('storage/'.$post->image->path) }}" alt="{{ $post->title }}" class="img-fluid">
+                    @endif
                     <p>
                         {{ $post->body }}
                     </p>
