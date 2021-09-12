@@ -2,7 +2,7 @@
     <a href="{{ route('web.index') }}">Inicio</a>
 </li>
 
-@if($tournaments->count() > 0)
+@if(isset($tournaments) && $tournaments->count() > 0)
 
 <li class="current">
     <a href="{{ route('web.tournaments')}}">Torneos</a>
