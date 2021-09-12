@@ -9,7 +9,7 @@ class CreateImageService
 {
     public function create($imageable, $image)
     {
-        $base_path = Str::replaceArray('\\', ['/', '/'], Str::lower(get_class($imageable))) . '/';
+        $base_path = Str::afterLast(Str::lower(get_class($imageable)), '\\');
 
         Image::create([
             'path' => $image->store($base_path, 'public'),
