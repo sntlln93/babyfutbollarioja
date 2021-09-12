@@ -20,14 +20,15 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('dashboard.posts.create')->with('post', new Post);;
+        return view('dashboard.posts.create')->with('post', new Post);
+        ;
     }
 
     public function store(Request $request)
     {
         $validatedPost = $request->validate([
             'title' => 'required|max:60',
-            'body' => 'required|max:2500',
+            'body' => 'required',
             'photo' => 'sometimes|mimes:jpeg,jpg'
         ]);
 
