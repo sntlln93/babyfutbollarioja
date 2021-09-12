@@ -5,7 +5,7 @@
 @if(isset($tournaments) && $tournaments->count() > 0)
 
 <li class="current">
-    <a href="{{ route('web.tournaments')}}">Torneos</a>
+    <a href="#">Torneos</a>
     <ul class="sub-current">
         @foreach ($tournaments as $tournament)
         <li>
