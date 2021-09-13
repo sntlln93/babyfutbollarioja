@@ -26,15 +26,15 @@
                 </h6>
 
                 @foreach ($players->all() as $player)
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="dropdown-list-image mr-3">
-                            <img class="rounded-circle" src="{{ asset('storage/' . $player->image->path) }}" alt="">
-                        </div>
-                        <div class="font-weight-bold">
-                            <div class="text-truncate">{{ $player->full_name }}</div>
-                            <div class="small text-gray-500">{{ $player->team->club->name }}</div>
-                        </div>
-                    </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="{{ asset('storage/' . $player->image?->path) }}" alt="">
+                    </div>
+                    <div class="font-weight-bold">
+                        <div class="text-truncate">{{ $player->full_name }}</div>
+                        <div class="small text-gray-500">{{ $player->team->club->name }}</div>
+                    </div>
+                </a>
                 @endforeach
             </div>
         </li>

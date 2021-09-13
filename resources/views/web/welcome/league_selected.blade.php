@@ -1,5 +1,32 @@
 @extends('web.welcome.welcome_partial')
 
+@section('styles')
+
+<style>
+    .category__filter {
+        background: #18191B;
+        font-weight: bold;
+        padding: .6em;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        color: white;
+        cursor: pointer;
+    }
+
+    .category__filter:active {
+        outline: none;
+
+    }
+
+    .category__filter--active,
+    .category__filter:hover {
+        background: white;
+        color: #18191B
+    }
+</style>
+
+@endsection
+
 @section('hero')
 <div class="item-slider" style="background:url({{ asset('img/default-bg.jpg') }});">
     <div class="container">
@@ -8,6 +35,11 @@
                 <div class="info-slider">
                     <h1>Torneos 2021</h1>
                     <p>Jugá con nosotros, nos jugamos por vos.</p>
+                </div>
+                <div>
+                    @foreach ($clubs as $club)
+                    <img src="{{ asset('storage/'.$club->image->path) }}" alt="">
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -30,6 +62,12 @@
 
                 <!-- Content Tabs -->
                 <div class="tab-content">
+                    <div class="mb-2" id="categoryToggle">
+                        @foreach ($tournament->categories as $category)
+                        <button class="category__filter {{ $loop->index === 0 ? "category__filter--active" : "" }}">CAT.
+                            {{ $category->name }}</button>
+                        @endforeach
+                    </div>
                     <!-- Tab Theree - statistics -->
                     <div class="tab-pane active" id="statistics">
                         <div class="row">

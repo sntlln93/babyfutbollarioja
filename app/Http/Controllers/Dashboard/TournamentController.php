@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Club;
 use App\Models\Game;
+use App\Models\Team;
 use App\Models\Type;
 use App\Models\Category;
 use App\Models\Tournament;
@@ -60,7 +61,8 @@ class TournamentController extends Controller
     public function show(Tournament $tournament)
     {
         $categories = $tournament->categories->pluck('id');
-        $clubs = Club::whereIn('id', $categories)->get();
+        $teams = Team::whereIn('category_id', $categories)->pluck('club_id');
+        $clubs = Club::whereIn('id', $teams)->get();
         $games = Game::where('tournament_id', $tournament->id)->paginate(20);
 
         return view('dashboard.tournaments.show')
