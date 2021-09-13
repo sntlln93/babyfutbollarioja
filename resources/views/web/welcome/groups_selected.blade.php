@@ -38,7 +38,7 @@
 @endsection
 
 @section('hero')
-<div class="item-slider" style="background:url({{ asset('img/default-bg.jpg') }});">
+<div class="item-slider" style="background:url({{ asset('storage/'.$tournament->image->path) }});">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-7">
