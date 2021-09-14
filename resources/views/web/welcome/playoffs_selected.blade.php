@@ -1,42 +1,5 @@
 @extends('web.welcome.welcome_partial')
 
-@section('styles')
-
-<style>
-    .category__filter {
-        background: #18191B;
-        font-weight: bold;
-        padding: .6em;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, .1);
-        color: white;
-        cursor: pointer;
-    }
-
-    .category__filter:active {
-        outline: none;
-
-    }
-
-    .category__filter--active,
-    .category__filter:hover {
-        background: white;
-        color: #18191B
-    }
-
-    .clubs {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-        grid-gap: 1em;
-    }
-
-    .clubs__logo img {
-        width: 100%;
-    }
-</style>
-
-@endsection
-
 @section('hero')
 <div class="item-slider" style="background:url({{ asset('storage/'.$tournament->image->path) }});">
     <div class="container">

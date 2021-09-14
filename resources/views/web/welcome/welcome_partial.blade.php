@@ -1,5 +1,45 @@
 @extends('web.layouts.app')
 
+@section('styles')
+<style>
+    .category__filter {
+        background: #18191B;
+        font-weight: bold;
+        padding: .6em;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        color: white;
+        cursor: pointer;
+    }
+
+    .category__filter:active {
+        outline: none;
+
+    }
+
+    .category__filter--active,
+    .category__filter:hover {
+        background: white;
+        color: #18191B
+    }
+
+    .clubs {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));
+        grid-gap: 1em;
+    }
+
+    .clubs__logo {
+        margin-block: auto;
+    }
+
+    .clubs__logo img {
+        width: 100%;
+    }
+</style>
+@yield('custom_styles')
+@endsection
+
 @section('content')
 <div class="hero-header">
     <div id="hero-slider" class="hero-slider">
