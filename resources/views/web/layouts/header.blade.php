@@ -6,7 +6,7 @@
                 <!-- Logo-->
                 <div class="col">
                     <div class="logo">
-                        <a href="index.html" title="Return Home">
+                        <a href="{{ route('web.index') }}" title="Return Home">
                             <img src="{{ asset('logo.png') }}" alt="Logo" class="logo_img">
                         </a>
                     </div>
