@@ -30,7 +30,7 @@ class ClubController extends Controller
     public function store(Request $request)
     {
         $validatedClub = $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:clubs,name',
             'field_description' => 'required',
             'shield' => 'required|mimes:png,svg',
             'area_code' => 'required|integer|digits_between:3,4',
