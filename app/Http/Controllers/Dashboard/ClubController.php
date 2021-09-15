@@ -68,10 +68,14 @@ class ClubController extends Controller
             'field_description' => 'required',
         ]);
 
-        $club->update([
-            'name' => $validatedClub['name'],
-            'field_description' => $validatedClub['field_description'],
+        $validatedPhone = $request->validate([
+            'area_code' => 'required|integer|digits_between:3,4',
+            'number' => 'required|integer|digits_between:5,7',
         ]);
+
+        $club->update($validatedClub);
+
+        $club->phone->update($validatedPhone);
 
         return redirect()->route('clubs.index');
     }
