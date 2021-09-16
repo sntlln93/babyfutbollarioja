@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\WebController;
 use App\Http\Controllers\Web\ShowPostController;
 use App\Http\Controllers\Web\ShowTournamentController;
+use App\Http\Controllers\Web\ShowRegulations;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -36,6 +37,10 @@ Route::name('web.')->group(function () {
 
     Route::get('posts', [ShowPostController::class, 'index'])->name('post.index');
     Route::get('posts/{post}', [ShowPostController::class, 'show'])->name('post.show');
+
+    Route::get('/regulation/general', [ShowRegulations::class, 'general'])->name('general.regulation');
+    Route::get('/regulation/disciplinary', [ShowRegulations::class, 'disciplinary'])->name('disciplinary.regulation');
+    Route::get('/regulation/game', [ShowRegulations::class, 'game'])->name('game.regulation');
 });
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
