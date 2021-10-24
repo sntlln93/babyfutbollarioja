@@ -32,7 +32,7 @@
                     </div>
                     <div class="font-weight-bold">
                         <div class="text-truncate">{{ $player->full_name }}</div>
-                        <div class="small text-gray-500">{{ $player->team->club->name }}</div>
+                        <div class="small text-gray-500">{{ $player->team?->club?->name }}</div>
                     </div>
                 </a>
                 @endforeach
