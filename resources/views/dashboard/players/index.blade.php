@@ -33,7 +33,7 @@
                             <tr>
                                 <td>{{ $player->full_name }}</td>
                                 <td>{{ $player->dni }}</td>
-                                <td>{{ $player->team->club->name }}</td>
+                                <td>{{ $player->team?->club?->name ?? "Agente libre" }}</td>
                                 <td>{{ $player->created_at->diffForHumans() }}</td>
                                 <td>{{ $player->updated_at->diffForHumans() }}</td>
                                 <td class="text-center">
