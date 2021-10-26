@@ -15,6 +15,7 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
+            $table->json('club');
 
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('club_id')->constrained()->onDelete('cascade');
