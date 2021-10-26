@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $casts = [
+        'player' => 'json'
+    ];
+
     public function game()
     {
         return $this->belongsTo(Game::class);

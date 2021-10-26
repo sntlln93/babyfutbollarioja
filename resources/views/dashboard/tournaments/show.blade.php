@@ -4,7 +4,8 @@
 <!-- Page Heading -->
 <div class="mb-4">
     <h1 class="h3 mb-0 text-gray-800">{{ $tournament->name }}</h1>
-    <small class="mb-0 text-gray-800">{{ Str::upper($tournament->type->type) }}</small>
+    <small class="mb-0 text-gray-800">{{ Str::upper($tournament->type) }}
+        [{{ Str::upper($tournament->double_game ? "Doble partido" : "Partido único") }}]</small>
 </div>
 
 <!-- Content Row -->
@@ -15,7 +16,7 @@
     <div class="card-body clubs">
         @foreach ($clubs as $club)
         <div>
-            <img src="{{ asset('storage/'.$club->image->path) }}" alt="{{ $club->name }}">
+            <img src="{{ asset('storage/'.$club->logo) }}" alt="{{ $club->name }}">
         </div>
         @endforeach
     </div>

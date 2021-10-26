@@ -16,8 +16,8 @@ class CreateSanctionsTable extends Migration
         Schema::create('sanctions', function (Blueprint $table) {
             $table->id();
             $table->string('reason');
-
-            $table->foreignId('player_id')->constrained();
+            $table->json('player'); //name, id, current_club
+            
             $table->timestamps();
         });
     }

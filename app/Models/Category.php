@@ -7,9 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $guarded = [];
-    
+    protected $casts = [
+        'years' => 'array'
+    ];
+
     public function tournaments()
     {
         return $this->belongsToMany(Tournament::class);
+    }
+
+    public function setYearsAttribute($value)
+    {
+        $this->attributes['years'] = json_encode($value);
     }
 }

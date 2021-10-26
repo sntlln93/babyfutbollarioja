@@ -19,10 +19,11 @@
                 <thead>
                     <tr class="text-center">
                         <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Privado</th>
                         <th>Activo</th>
                         <th>Categorías</th>
                         <th>Creado</th>
-                        <th>Actualizado</th>
                         <th>Editar</th>
                         <th>Abrir</th>
                         <th>Eliminar</th>
@@ -32,14 +33,16 @@
                     @forelse ($tournaments as $tournament)
                     <tr>
                         <td>{{ $tournament->name }}</td>
+                        <td>{{ $tournament->type }} ({{ $tournament->double_game ? "Doble partido" : "Partido único" }})
+                        </td>
                         <td>{{ $tournament->is_active ? 'Sí' : 'No' }}</td>
+                        <td>{{ $tournament->is_private ? 'Sí' : 'No' }}</td>
                         <td>
                             @foreach ($tournament->categories as $category)
                             <span class="badge badge-primary">{{ $category->name }}</span>
                             @endforeach
                         </td>
                         <td>{{ $tournament->created_at->diffForHumans() }}</td>
-                        <td>{{ $tournament->updated_at->diffForHumans() }}</td>
                         <td class="text-center">
                             <a href="{{ route('tournaments.edit', ['tournament' => $tournament->id]) }}"
                                 class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>

@@ -34,7 +34,7 @@
 <div class="form-row mb-2">
     <div class="col-sm-12">
         <label for="name">Código de area</label>
-        <input type="text" class="form-control @error('area_code') border-danger @enderror" id="area_code"
+        <input type="number" class="form-control @error('area_code') border-danger @enderror" id="area_code"
             name="area_code" placeholder="Colocá la característica. Ej: 380, 351"
             value="{{ old('area_code', isset($club) ? $club->phone?->area_code : '') }}" required>
         <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
 <div class="form-row mb-2">
     <div class="col-sm-12">
         <label for="name">Número de teléfono</label>
-        <input type="text" class="form-control @error('number') border-danger @enderror" id="number" name="number"
+        <input type="number" class="form-control @error('number') border-danger @enderror" id="number" name="number"
             placeholder="Escribí el resto del número. Ej: 624080, 9870816"
             value="{{ old('number', isset($club) ? $club->phone?->number : '') }}" required>
         <span class="invalid-feedback" role="alert">

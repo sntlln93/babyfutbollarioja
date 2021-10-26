@@ -45,7 +45,7 @@
                     @forelse ($clubs as $club)
                     <tr>
                         <td class="club__logo">
-                            <img src="{{ asset('storage/'.$club->image->path) }}" alt="{{ $club->name }}">
+                            <img src="{{ asset('storage/'.$club->logo) }}" alt="{{ $club->name }}">
                         </td>
                         <td>
                             {{ $club->name }}

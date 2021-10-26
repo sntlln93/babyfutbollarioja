@@ -19,6 +19,7 @@
                 <thead>
                     <tr class="text-center">
                         <th>Nombre</th>
+                        <th>Años permitidos</th>
                         <th>Activo</th>
                         <th>Creada</th>
                         <th>Actualizada</th>
@@ -29,6 +30,13 @@
                     @forelse ($categories as $category)
                     <tr>
                         <td>{{ $category->name }}</td>
+                        <td>
+                            @forelse($category->years as $year)
+                            <span class="badge badge-info badge-sm">{{ $year }}</span>
+                            @empty
+                            <span class="badge badge-info badge-sm">Categoría libre</span>
+                            @endforelse
+                        </td>
                         <td>{{ $category->is_active ? 'Sí' : 'No' }}</td>
                         <td>{{ $category->created_at->diffForHumans() }}</td>
                         <td>{{ $category->updated_at->diffForHumans() }}</td>

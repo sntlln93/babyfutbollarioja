@@ -8,6 +8,7 @@ use App\Models\Phone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreClubRequest;
 use App\Services\CreateImageService;
 use App\Services\CreatePhoneService;
 use App\Services\CreateTeamsFromClubService;
@@ -27,25 +28,16 @@ class ClubController extends Controller
         return view('dashboard.clubs.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreClubRequest $request)
     {
-        $validatedClub = $request->validate([
-            'name' => 'required|unique:clubs,name',
-            'field_description' => 'required',
-            'shield' => 'required|mimes:png,svg',
-            'area_code' => 'required|integer|digits_between:3,4',
-            'number' => 'required|integer|digits_between:5,7',
-        ]);
+        DB::transaction(function () use ($request) {
+            $validatedClub = $request->validatedClub();
+            $validatedPhone = $request->validatedPhone();
 
-        DB::transaction(function () use ($validatedClub) {
-            $club = Club::create([
-                'name' => $validatedClub['name'],
-                'field_description' => $validatedClub['field_description'],
-            ]);
+            $club = Club::create($validatedClub);
 
-            (new CreateImageService)->create($club, $validatedClub['shield']);
             (new CreateTeamsFromClubService)->create($club->id);
-            (new CreatePhoneService)->create($club, $validatedClub['area_code'], $validatedClub['number']);
+            (new CreatePhoneService)->create($club, $validatedPhone['area_code'], $validatedPhone['number']);
         });
 
         return redirect()->route('clubs.index');
@@ -69,8 +61,8 @@ class ClubController extends Controller
         ]);
 
         $validatedPhone = $request->validate([
-            'area_code' => 'required|integer|digits_between:3,4',
-            'number' => 'required|integer|digits_between:5,7',
+            'area_code' => 'required','integer','digits_between:3,4',
+            'number' => 'required','integer','digits_between:5,7',
         ]);
 
         $club->update($validatedClub);
@@ -83,7 +75,7 @@ class ClubController extends Controller
     public function destroy(Club $club)
     {
         DB::transaction(function () use ($club) {
-            (new DeleteImageFromDiskService)->delete($club->image->path);
+            (new DeleteImageFromDiskService)->delete($club->logo);
             $club->phone()->delete();
             $club->delete();
         });

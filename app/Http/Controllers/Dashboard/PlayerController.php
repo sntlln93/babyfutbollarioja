@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Club;
 use App\Models\Team;
 use App\Models\Player;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,7 @@ class PlayerController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $validatedPlayer = $request->validate([
             'lastname' => 'required',
             'name' => 'required',
@@ -41,16 +43,15 @@ class PlayerController extends Controller
         ]);
 
         DB::transaction(function () use ($validatedPlayer) {
+            $base_path = Str::afterLast(Str::lower(get_class(new Club)), '\\');
+
             $player = Player::create([
                 'lastname' => $validatedPlayer['lastname'],
                 'name' => $validatedPlayer['name'],
                 'born_in' => Carbon::parse($validatedPlayer['born_in']),
                 'dni' => $validatedPlayer['dni'],
+                'photo' => $validatedPlayer['photo']->store($base_path, 'public'),
             ]);
-
-            if (array_key_exists('photo', $validatedPlayer)) {
-                (new CreateImageService)->create($player, $validatedPlayer['photo']);
-            }
 
             $team_id = Team::select('id')
                 ->where('category_id', $validatedPlayer['category_id'])
@@ -65,7 +66,6 @@ class PlayerController extends Controller
 
     public function edit(Player $player)
     {
-
         return view('dashboard.players.edit')->with('player', $player);
     }
 
@@ -85,7 +85,7 @@ class PlayerController extends Controller
     public function destroy(Player $player)
     {
         DB::transaction(function () use ($player) {
-            (new DeleteImageFromDiskService)->delete($player->image->path);
+            (new DeleteImageFromDiskService)->delete($player->photo);
             $player->image->delete();
             $player->teams()->detach();
             $player->delete();

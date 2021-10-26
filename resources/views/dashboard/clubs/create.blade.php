@@ -19,15 +19,15 @@
                     <label for="name">Escudo</label>
                     <div class="input-group mb-3">
                         <div class="custom-file">
-                            <input type="file" name="shield"
-                                class="custom-file-input @error('shield') border-danger @enderror" id="shield" required>
-                            <label id="file_inner" class="custom-file-label" for="shield">Elegí el escudo</label>
+                            <input type="file" name="logo"
+                                class="custom-file-input @error('logo') border-danger @enderror" id="logo" required>
+                            <label id="file_inner" class="custom-file-label" for="logo">Elegí el escudo</label>
                         </div>
                     </div>
                     <span class="invalid-feedback" role="alert">
                         <strong>Este campo es obligatorio</strong>
                     </span>
-                    @error('shield')
+                    @error('logo')
                     <span class="text-danger" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -50,7 +50,7 @@
 @section('scripts')
 
 <script>
-    const fileInput = document.getElementById("shield");
+    const fileInput = document.getElementById("logo");
 
         fileInput.addEventListener("change", () => {
             const file_name = fileInput.value.replace(/^.*?([^\\\/]*)$/, '$1');

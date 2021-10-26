@@ -19,6 +19,7 @@ class CreatePlayersTable extends Migration
             $table->string('name');
             $table->string('dni')->unique();
             $table->date('born_in');
+            $table->string('photo')->nullable();
             
             $table->timestamps();
         });

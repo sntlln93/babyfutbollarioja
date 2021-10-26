@@ -16,9 +16,12 @@ class CreateTournamentsTable extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('double_game');
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_private')->default(false);
+            $table->enum('type', config('types'));
+            $table->boolean('has_fixture')->default(false);
 
-            $table->foreignId('type_id')->constrained();
             $table->timestamps();
         });
     }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Team;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
@@ -29,8 +31,13 @@ class Player extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function events()
+    // public function events()
+    // {
+    //     return $this->hasMany(Event::class, 'player.id');
+    // }
+
+    public function getEventsAttribute()
     {
-        return $this->hasMany(Event::class);
+        return Event::select('events.*')->join('players', DB::raw('JSON_EXTRACT(events.player, "$.id")'), '=', 'players.id')->where('players.id', $this->id)->get();
     }
 }

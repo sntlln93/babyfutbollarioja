@@ -15,7 +15,8 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->Year('name')->unique();
+            $table->string('name')->unique();
+            $table->json('years')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

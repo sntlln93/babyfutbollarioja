@@ -31,18 +31,36 @@
             <div class="form-row mb-2">
                 <div class="col-sm-12">
                     <label for="type_id">Tipo</label>
-                    <select class="custom-select form-control @error('type_id') invalid-feedback @enderror "
-                        name="type_id" required>
+                    <select class="custom-select form-control @error('type_id') invalid-feedback @enderror" name="type"
+                        required>
                         <option></option>
-                        @foreach ($types as $type)
-                        <option value="{{ $type->id }}" data-subtext="{{ $type->name }}">
-                            {{ $type->name }}</option>
+                        @foreach (config('types') as $type)
+                        <option value="{{ $type }}" @if(old('type', null)==$type) selected @endif>
+                            {{ Str::title($type) }}</option>
                         @endforeach
                     </select>
                     <span class="invalid-feedback" role="alert">
                         <strong>Este campo es obligatorio</strong>
                     </span>
-                    @error('type_id')
+                    @error('type')
+                    <span class="text-danger" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row mb-2">
+                <div class="col-sm-12">
+                    <label>Doble partido</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="double_game" id="double_game" type="checkbox"
+                                value="1">
+                            <label class="form-check-label" for="double_game">Sí</label>
+                        </div>
+                    </div>
+                    @error('double_game')
                     <span class="text-danger" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -57,8 +75,7 @@
                         @foreach ($categories as $category)
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" name="categories[]" type="checkbox"
-                                id="category{{ $category->id }}" value="{{ $category->id }}"
-                                data-category="{{ $category->name }}">
+                                id="category{{ $category->id }}" value="{{ $category->id }}">
                             <label class="form-check-label"
                                 for="category{{ $category->id }}">{{ $category->name }}</label>
                         </div>
@@ -74,14 +91,34 @@
 
             <div class="form-row mb-2">
                 <div class="col-sm-12">
-                    <label for="photo">Foto</label>
+                    <label for="categories">Visibilidad</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="is_active" type="checkbox" id="isActive" value="1">
+                            <label class="form-check-label" for="isActive">Mostrar en la página principal</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="is_private" type="checkbox" id="isPrivate" value="1">
+                            <label class="form-check-label" for="isPrivate">Torneo privado</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row mb-2" id="photoContainer">
+                <div class="col-sm-12">
+                    <label for="photo">Foto (<small>Ésta se
+                            mostrará en la página web y funcionara como foto de portada o presentación del
+                            torneo</small>)</label>
+
                     <div class="input-group mb-3">
                         <div class="custom-file">
                             <input type="file" name="photo"
-                                class="custom-file-input @error('photo') border-danger @enderror" id="shield" required>
-                            <label id="file_inner" class="custom-file-label" for="photo">Elegí una foto. Ésta se
-                                mostrará en la página web y funcionara como foto de portada o presentación del
-                                torneo</label>
+                                class="custom-file-input @error('photo') border-danger @enderror">
+                            <label id="file_inner" class="custom-file-label" for="photo">Elegí una foto.</label>
                         </div>
                     </div>
                     <span class="invalid-feedback" role="alert">
@@ -95,8 +132,6 @@
                 </div>
             </div>
 
-            <div id="fixtures"></div>
-
             <button class="my-3 btn btn-primary w-100" type="submit">Guardar torneo</button>
         </form>
     </div>
@@ -104,61 +139,23 @@
 
 @endsection
 
-@section('styles')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endsection
-
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@include('dashboard._partials.validation')
 
 <script>
-    $(document).ready(function() {
-            $('.categories').select2();
-        });
+    const isActive = document.getElementById('isActive');
+    const isPrivate = document.getElementById('isPrivate');
+    const photo = document.getElementById('photoContainer');
 
-</script>
+    isPrivate.addEventListener('change', () => {
+        photo.style.display = isPrivate.checked ? 'none' : 'block';
+        isActive.checked = isPrivate.checked ? false : true;
+    });
 
-<script>
-    (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-
-</script>
-
-<script>
-    const categories = document.querySelectorAll('.form-check-input');
-    const fixtures = document.getElementById('fixtures');
-
-    const createFixture = (category) => {
-        const fixture = document.createElement('div');
-        fixture.id = `fixture${category.id}`;
-        fixture.innerText = `Fixture Categoría ${category.name}`;
-        fixtures.appendChild(fixture);
-    }
-
-    const onCategorySelected = (event) => {
-        const category = event.target;
-        if(category.checked) {
-            createFixture({id: category.value, name: category.dataset.category});
-        } else {
-            document.getElementById(`fixture${category.value}`).remove();
-        }
-    }
-    
-    categories.forEach(category => category.addEventListener('change', onCategorySelected));
+    isActive.addEventListener('change', () => {
+        isPrivate.checked = isActive.checked ? false : isActive.checked;
+        photo.style.display = isPrivate.checked ? 'none' : 'block';
+    });
 </script>
 @endsection

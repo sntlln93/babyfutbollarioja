@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -21,15 +22,9 @@ class CategoryController extends Controller
         return view('dashboard.categories.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $category = $request->validate([
-            'name' => 'required|unique:categories|digits:4|integer|min:1990|max:' . Carbon::now()->format('Y'),
-        ])['name'];
-
-        Category::create([
-            'name' => $category
-        ]);
+        Category::create($request->validated());
 
         return redirect()->route('categories.index');
     }

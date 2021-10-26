@@ -28,7 +28,7 @@
                 @foreach ($players->all() as $player)
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="{{ asset('storage/' . $player->image?->path) }}" alt="">
+                        <img class="rounded-circle" src="{{ asset('storage/' . $player->photo) }}" alt="">
                     </div>
                     <div class="font-weight-bold">
                         <div class="text-truncate">{{ $player->full_name }}</div>

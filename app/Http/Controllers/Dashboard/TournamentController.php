@@ -9,6 +9,7 @@ use App\Models\Type;
 use App\Models\Category;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreTournamentRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\CreateImageService;
@@ -25,32 +26,33 @@ class TournamentController extends Controller
     public function create()
     {
         $categories = Category::where('is_active', true)->get();
-        $types = Type::all();
 
         return view('dashboard.tournaments.create')
-            ->with('types', $types)
             ->with('categories', $categories);
     }
 
-    public function store(Request $request)
+    public function store(StoreTournamentRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'categories' => 'required',
-            'categories.*' => 'required',
-            'type_id' => 'required',
-            'photo' => 'required|mimes:jpg,jpeg'
-        ]);
+        $validatedData = $request->validated();
 
         DB::transaction(function () use ($validatedData) {
+            if ($validatedData['is_active']) {
+                Tournament::query()->update(['is_active' => false]);
+            }
+
             $tournament = Tournament::create([
                 'name' => $validatedData['name'],
-                'type_id' => $validatedData['type_id']
+                'type' => $validatedData['type'],
+                'is_private' => $validatedData['is_private'],
+                'double_game' => $validatedData['double_game'],
+                'is_active' => $validatedData['is_active'],
             ]);
 
-            (new CreateImageService)->create($tournament, $validatedData['photo']);
+            if (!$validatedData['is_private']) {
+                (new CreateImageService)->create($tournament, $validatedData['photo']);
+            }
 
-            return $tournament
+            $tournament
                 ->categories()
                 ->sync($validatedData['categories']);
         });

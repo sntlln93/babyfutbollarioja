@@ -47,7 +47,7 @@
             <div class="form-row mb-2">
                 <div class="col-sm-12">
                     <label for="dni">DNI</label>
-                    <input type="text" class="form-control @error('dni') border-danger @enderror" id="dni" name="dni"
+                    <input type="number" class="form-control @error('dni') border-danger @enderror" id="dni" name="dni"
                         placeholder="DNI" value="{{ old('dni') }}" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>Este campo es obligatorio</strong>
@@ -63,8 +63,9 @@
             <div class="form-row mb-2">
                 <div class="col-sm-12">
                     <label for="born_in">Fecha de nacimiento</label>
-                    <input type="date" class="form-control @error('born_in') border-danger @enderror" id="born_in"
-                        name="born_in" placeholder="Fecha de nacimiento" value="{{ old('born_in') }}" required>
+                    <input type="date" min="1960-01-01" class="form-control @error('born_in') border-danger @enderror"
+                        id="born_in" name="born_in" placeholder="Fecha de nacimiento" value="{{ old('born_in') }}"
+                        required>
                     <span class="invalid-feedback" role="alert">
                         <strong>Este campo es obligatorio</strong>
                     </span>

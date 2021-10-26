@@ -9,7 +9,7 @@
 <!-- Content Row -->
 <div class="row justify-content-between">
     <div class="card  player--info">
-        <img class="card-img-top" src="{{ asset('storage/' . $player->image->path) }}" alt="Card image cap">
+        <img class="card-img-top" src="{{ asset('storage/' . $player->photo) }}" alt="Card image cap">
         <div class="card-body">
             <small>{{ $player->team ? $player->team->club->name : 'Agente libre' }}</small>
             <h3 class="card-title">{{ $player->full_name }}</h3>
@@ -38,7 +38,7 @@
                 <li class="list-group-item {{ $team->pivot->is_active ? 'active' : '' }}">
                     <b>{{ $team->pivot->created_at->format('d/m/Y') }}</b><br>
                     <div class="d-flex align-items-center">
-                        <img class="icon" src="{{ asset('storage/'. $team->club->image->path) }}" alt="">
+                        <img class="icon" src="{{ asset('storage/'. $team->club->logo) }}" alt="">
                         {{ $team->club->name }}
                     </div>
                 </li>
@@ -54,10 +54,10 @@
                 @foreach ($player->events as $event)
                 <li class="list-group-item">
                     <strong>
-                        <p class="text-uppercase mb-0">{{ $event->game->tournament->name }}</p>
+                        <p class="text-uppercase mb-0">{{ $event->game?->tournament->name }}</p>
                     </strong>
-                    {{ $event->game->local->club->name }} vs
-                    {{ $event->game->away->club->name }}
+                    {{ $event->game?->local->club->name }} vs
+                    {{ $event->game?->away->club->name }}
                     <img class="icon" src="{{ $event->icon }}" alt="">
                 </li>
                 @endforeach
