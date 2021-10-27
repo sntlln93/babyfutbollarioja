@@ -31,34 +31,12 @@
                         <input class="form-check-input" type="checkbox" id="free" value="libre">
                         <label class="form-check-label" for="free">Categoría libre</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="years2" name="years[]" value="2004">
-                        <label class="form-check-label" for="years2">2004</label>
+                    @foreach (config('allowed_years') as $year) <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="years{{ $loop->index }}" name="years[]"
+                            value="{{ $year }}">
+                        <label class="form-check-label" for="years{{ $loop->index }}">{{ $year }}</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="years3" name="years[]" value="2006">
-                        <label class="form-check-label" for="years3">2006</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="years4" name="years[]" value="2008">
-                        <label class="form-check-label" for="years4">2008</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="years5" name="years[]" value="2010">
-                        <label class="form-check-label" for="years5">2010</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="years6" name="years[]" value="2012">
-                        <label class="form-check-label" for="years6">2012</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="years7" name="years[]" value="2014">
-                        <label class="form-check-label" for="years7">2014</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="years8" name="years[]" value="2016">
-                        <label class="form-check-label" for="years8">2016</label>
-                    </div>
+                    @endforeach
                     <span class="invalid-feedback" role="alert">
                         <strong>Este campo es obligatorio</strong>
                     </span>
