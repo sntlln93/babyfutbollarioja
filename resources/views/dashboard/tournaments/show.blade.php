@@ -11,7 +11,13 @@
 <!-- Content Row -->
 <div class="card shadow mb-4">
     <div class="card-header">
-        <h6 class="m-0 font-weight-bold text-primary">Clubes participantes</h6>
+        <h4 class="m-0 font-weight-bold text-primary">Clubes participantes <button class="btn btn-sm btn-success"><i
+                    class="fas fa-plus"></i></button></h4>
+        <p class="m-0 text-muted">Categorías
+            @foreach ($tournament->categories as $category)
+            <span class="badge badge-info badge-sm">{{ $category['name'] }}</span>
+            @endforeach
+        </p>
     </div>
     <div class="card-body clubs">
         @foreach ($clubs as $club)
@@ -21,50 +27,48 @@
         @endforeach
     </div>
 </div>
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Partidos</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr class="text-center">
-                        <th>Categoría</th>
-                        <th>Partido</th>
-                        <th>Resultado</th>
-                        <th>Creado</th>
-                        <th>Actualizado</th>
-                        <th>Finalizar</th>
-                        <th>Ver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($games as $game)
-                    <tr>
-                        <td>{{ $game->local->category->name }}</td>
-                        <td>{{ $game->local->club->name }} vs {{ $game->away->club->name }}</td>
-                        <td>{{ $game->local_score }} - {{ $game->away_score }}</td>
-                        <td>{{ $tournament->created_at->diffForHumans() }}</td>
-                        <td>{{ $tournament->updated_at->diffForHumans() }}</td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-primary"><i class="fas fa-futbol"></i></a>
-                        </td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="7">Este torneo aún no tiene partidos.</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-            {{ $games->links() }}
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr class="card-header py-3">
+                <th colspan="7">
+                    <h4 class="m-0 font-weight-bold text-primary">Partidos</h4>
+                </th>
+            </tr>
+            <tr class="text-center">
+                <th>Categoría</th>
+                <th>Partido</th>
+                <th>Resultado</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Finalizar</th>
+                <th>Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($games as $game)
+            <tr>
+                <td>{{ $game->local->category->name }}</td>
+                <td>{{ $game->local->club->name }} vs {{ $game->away->club->name }}</td>
+                <td>{{ $game->local_score }} - {{ $game->away_score }}</td>
+                <td>{{ $tournament->created_at->diffForHumans() }}</td>
+                <td>{{ $tournament->updated_at->diffForHumans() }}</td>
+                <td class="text-center">
+                    <a href="#" class="btn btn-primary"><i class="fas fa-futbol"></i></a>
+                </td>
+                <td class="text-center">
+                    <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                </td>
+            </tr>
+            @empty
+            <tr class="bg-white">
+                <td colspan="7">Este torneo aún no tiene partidos.</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+    {{ $games->links() }}
 
-        </div>
-    </div>
 </div>
 @endsection
 

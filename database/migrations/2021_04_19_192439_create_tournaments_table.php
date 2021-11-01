@@ -18,6 +18,7 @@ class CreateTournamentsTable extends Migration
             $table->string('name');
             $table->json('categories');
             $table->boolean('has_fixture')->default(false);
+            $table->string('photo');
 
             //visibility
             $table->boolean('is_main')->default(false);

@@ -30,16 +30,16 @@ class StoreTournamentRequest extends FormRequest
                 'double_game' => 'required',
                 'type' => 'required',
                 'photo' => 'required_if:is_private,false|mimes:jpg,jpeg',
-                'is_active' => 'nullable',
-                'is_private' => 'nullable'
+                'is_main' => 'nullable',
+                'is_public' => 'nullable'
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'is_active' => $this->has('is_active') ? true : false,
-            'is_private' => $this->has('is_private') ? true : false,
+            'is_main' => $this->has('is_main') ? true : false,
+            'is_public' => $this->has('is_public') ? true : false,
             'double_game' => $this->has('double_game') ? true : false,
         ]);
     }

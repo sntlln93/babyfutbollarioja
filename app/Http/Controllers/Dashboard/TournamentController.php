@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Club;
 use App\Models\Game;
-use App\Models\Team;
-use App\Models\Type;
 use App\Models\Category;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
@@ -36,25 +34,14 @@ class TournamentController extends Controller
         $validatedData = $request->validated();
 
         DB::transaction(function () use ($validatedData) {
-            if ($validatedData['is_active']) {
-                Tournament::query()->update(['is_active' => false]);
+            if ($validatedData['is_main']) {
+                Tournament::query()->update(['is_main' => false]);
             }
 
-            $tournament = Tournament::create([
-                'name' => $validatedData['name'],
-                'type' => $validatedData['type'],
-                'is_private' => $validatedData['is_private'],
-                'double_game' => $validatedData['double_game'],
-                'is_active' => $validatedData['is_active'],
-            ]);
+            $validatedData['photo'] = (new CreateImageService)->create((new Tournament), $validatedData['photo']);
+            $validatedData['categories'] = Category::find($validatedData['categories'])->map(fn ($category) => ['id' => $category->id, 'name' => $category->name]);
 
-            if (!$validatedData['is_private']) {
-                (new CreateImageService)->create($tournament, $validatedData['photo']);
-            }
-
-            $tournament
-                ->categories()
-                ->sync($validatedData['categories']);
+            Tournament::create($validatedData);
         });
 
         return redirect()->route('tournaments.index');
@@ -62,9 +49,7 @@ class TournamentController extends Controller
 
     public function show(Tournament $tournament)
     {
-        $categories = $tournament->categories->pluck('id');
-        $teams = Team::whereIn('category_id', $categories)->pluck('club_id');
-        $clubs = Club::whereIn('id', $teams)->get();
+        $clubs = Club::all();
         $games = Game::where('tournament_id', $tournament->id)->paginate(20);
 
         return view('dashboard.tournaments.show')
