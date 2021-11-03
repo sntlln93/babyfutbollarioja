@@ -17,6 +17,8 @@ class CreateTournamentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->json('categories');
+            $table->json('clubs')->nullable();
+            
             $table->boolean('has_fixture')->default(false);
             $table->string('photo');
 

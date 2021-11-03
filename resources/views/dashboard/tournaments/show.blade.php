@@ -11,8 +11,9 @@
 <!-- Content Row -->
 <div class="card shadow mb-4">
     <div class="card-header">
-        <h4 class="m-0 font-weight-bold text-primary">Clubes participantes <button class="btn btn-sm btn-success"><i
-                    class="fas fa-plus"></i></button></h4>
+        <h4 class="m-0 font-weight-bold text-primary">Clubes participantes <a
+                href="{{ route('tournaments.add-teams-form', ['tournament' => $tournament->id]) }}"
+                class="btn btn-sm btn-success"><i class="fas fa-plus"></i></a></h4>
         <p class="m-0 text-muted">Categorías
             @foreach ($tournament->categories as $category)
             <span class="badge badge-info badge-sm">{{ $category['name'] }}</span>
@@ -20,15 +21,19 @@
         </p>
     </div>
     <div class="card-body clubs">
-        @foreach ($clubs as $club)
+        @if($tournament->clubs)
+        @forelse ($tournament->clubs as $club)
         <div>
             <img src="{{ asset('storage/'.$club->logo) }}" alt="{{ $club->name }}">
         </div>
-        @endforeach
+        @empty
+        <p>No hay clubes registrados</p>
+        @endforelse
+        @endif
     </div>
 </div>
 <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered" width="100%" cellspacing="0">
         <thead>
             <tr class="card-header py-3">
                 <th colspan="7">

@@ -10,7 +10,8 @@ class Tournament extends Model
 {
     protected $guarded = [];
     protected $casts = [
-        'categories' => 'array'
+        'categories' => 'array',
+        'clubs' => 'array'
     ];
 
     public function categories()
@@ -36,5 +37,15 @@ class Tournament extends Model
     public function getVisibilityAttribute()
     {
         return $this->is_public ? 'Público' : 'Privado';
+    }
+
+    public function getClubsAttribute($value)
+    {
+        return json_decode($value);
+    }
+
+    public function IsParticipating($clubId)
+    {
+        return collect($this->clubs)->first(fn ($club) => $club->id == $clubId) ? true : false;
     }
 }

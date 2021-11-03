@@ -49,12 +49,10 @@ class TournamentController extends Controller
 
     public function show(Tournament $tournament)
     {
-        $clubs = Club::all();
         $games = Game::where('tournament_id', $tournament->id)->paginate(20);
 
         return view('dashboard.tournaments.show')
             ->with('tournament', $tournament)
-            ->with('clubs', $clubs)
             ->with('games', $games);
     }
 

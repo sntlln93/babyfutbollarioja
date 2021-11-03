@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\ShowRegulations;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
+use App\Http\Controllers\Dashboard\AddClubsToTournamentController;
 use App\Http\Controllers\Dashboard\ClubController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\PostController;
@@ -51,4 +52,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('players', PlayerController::class);
     Route::resource('posts', PostController::class);
     Route::post('players-category', [FetchCategoriesFromBornDateController::class, 'get']);
+
+    Route::get('tournaments/{tournament}/add-clubs/', [AddClubsToTournamentController::class, 'create'])->name('tournaments.add-teams-form');
+    Route::post('tournaments/{tournament}/add-clubs/', [AddClubsToTournamentController::class, 'store'])->name('tournaments.add-teams');
 });
