@@ -14,11 +14,6 @@ class Post extends Model
         return Str::title($value);
     }
 
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
-
     public function author()
     {
         return $this->belongsTo(User::class, 'created_by');
