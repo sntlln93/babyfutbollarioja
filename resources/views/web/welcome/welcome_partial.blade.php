@@ -84,11 +84,10 @@
                     @foreach ($posts as $post)
                     <div class="post-item">
                         <div class="row">
-                            @if ($post->image()->exists())
+                            @if ($post->photo)
                             <div class="col-md-4">
                                 <div class="img-hover">
-                                    <img src="{{ asset('storage/' . $post->image->path) }}" alt=""
-                                        class="img-responsive">
+                                    <img src="{{ asset('storage/' . $post->photo) }}" alt="" class="img-responsive">
                                     <div class="overlay"><a href="{{ route('web.post.show', ['post' => 1]) }}">+</a>
                                     </div>
                                 </div>

@@ -75,7 +75,6 @@ class PlayerController extends Controller
     {
         DB::transaction(function () use ($player) {
             (new DeleteImageFromDiskService)->delete($player->photo);
-            $player->image->delete();
             $player->teams()->detach();
             $player->delete();
         });
