@@ -31,6 +31,8 @@ class StoreClubRequest extends FormRequest
             'logo' => ['required','mimes:png,svg'],
             'area_code' => ['required','integer','digits_between:3,4'],
             'number' => ['required','integer','digits_between:5,7'],
+            'categories' => ['required','array'],
+            'categories.*' => ['required','exists:categories,id'],
         ];
     }
 
@@ -53,5 +55,10 @@ class StoreClubRequest extends FormRequest
             'area_code' => $validatedPhone['area_code'],
             'number' => $validatedPhone['number'],
         ];
+    }
+
+    public function validatedCategories()
+    {
+        return $this->validated()['categories'];
     }
 }

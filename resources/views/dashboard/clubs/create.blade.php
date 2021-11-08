@@ -16,6 +16,30 @@
 
             <div class="form-row mb-2">
                 <div class="col-sm-12">
+                    <label class="" for="categories">Categorías</label>
+                    <div>
+                        @foreach ($categories as $category)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="categories[]" type="checkbox"
+                                id="category{{ $category->id }}" value="{{ $category->id }}">
+                            <label class="form-check-label" for="category{{ $category->id }}">{{ $category->name
+                                }}</label>
+                        </div>
+                        @endforeach
+                    </div>
+                    <small id="categoryHelp" class="form-text text-muted">
+                        Se creará un equipo por cada categoría seleccionada.
+                    </small>
+                    @error('categories')
+                    <span class="text-danger" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row mb-2">
+                <div class="col-sm-12">
                     <label for="name">Escudo</label>
                     <div class="input-group mb-3">
                         <div class="custom-file">
