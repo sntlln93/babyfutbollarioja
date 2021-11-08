@@ -24,16 +24,6 @@ class Tournament extends Model
         return $this->hasMany(Game::class);
     }
 
-    public function type()
-    {
-        return $this->belongsTo(Type::class);
-    }
-
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
-
     public function getVisibilityAttribute()
     {
         return $this->is_public ? 'Público' : 'Privado';
