@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             @endif
-                            <div class="{{ $post->image()->exists() ? 'col-md-8' : 'col' }}">
+                            <div class="{{ $post->image ? 'col-md-8' : 'col' }}">
                                 <h5><a href="{{ route('web.post.show', ['post' => 1]) }}">{{ $post->title }}</a>
                                 </h5>
                                 <span class="data-info">{{ $post->author->full_name }}.
