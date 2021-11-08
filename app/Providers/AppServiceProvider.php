@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView('pagination::bootstrap-4');
 
         View::composer('web.layouts.menu', function ($view) {
-            $tournaments = Tournament::where('is_private', false)->get();
+            $tournaments = Tournament::where('is_public', true)->get();
             $view->with('tournaments', $tournaments);
         });
     }

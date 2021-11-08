@@ -12,7 +12,7 @@ class WebController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
-        $tournament = Tournament::where('is_active', true)->first();
+        $tournament = Tournament::where('is_main', true)->first();
 
         if (!$tournament) {
             return view('web.welcome.unselected')
