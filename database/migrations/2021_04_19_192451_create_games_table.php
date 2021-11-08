@@ -16,16 +16,14 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->date('date')->nullable();
-            $table->integer('local_score');
-            $table->integer('away_score');
+            $table->integer('local_score')->nullable();
+            $table->integer('away_score')->nullable();
 
-            $table->unsignedBigInteger('local_id');
-            $table->unsignedBigInteger('away_id');
-
-            $table->foreign('local_id')->references('id')->on('teams')->onDelete('cascade');
-            $table->foreign('away_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->json('local');
+            $table->json('away');
 
             $table->foreignId('tournament_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

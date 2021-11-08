@@ -5,7 +5,15 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Nuevo jugador</h1>
 </div>
-
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="row">
     <div class="col-sm-12 col-md-8 mx-auto">
         <form action="{{ route('players.store') }}" method="POST" class="needs-validation" novalidate
@@ -48,7 +56,7 @@
                 <div class="col-sm-12">
                     <label for="dni">DNI</label>
                     <input type="number" class="form-control @error('dni') border-danger @enderror" id="dni" name="dni"
-                        placeholder="DNI" value="{{ old('dni') }}" required>
+                        placeholder="DNI" value="{{ old('dni') }}" pattern="[0-9]{11}" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>Este campo es obligatorio</strong>
                     </span>
@@ -97,34 +105,15 @@
             </div>
 
             <div class="form-row mb-2">
-                <div class="col-sm-12 col-md-8">
-                    <label for="club_id">Club</label>
-                    <select class="custom-select" id="clubs" name="club_id" disabled>
+                <div class="col-sm-12">
+                    <label for="team_id">Club</label>
+                    <select class="custom-select" id="clubs" name="team_id" disabled>
                         <option selected>Elegí el club</option>
-                        @foreach ($clubs as $club)
-                        <option value="{{ $club->id }}">{{ $club->name }}</option>
-                        @endforeach
                     </select>
                     <span class="invalid-feedback" role="alert">
                         <strong>Este campo es obligatorio</strong>
                     </span>
-                    @error('club_id')
-                    <span class="text-danger" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="col-sm-12 col-md-4">
-                    <label for="category_id">Categoría</label>
-                    <select class="custom-select" id="available_categories" name="category_id" disabled>
-                        <option selected>Elegí la categoría</option>
-                    </select>
-
-                    <span class="invalid-feedback" role="alert">
-                        <strong>Este campo es obligatorio</strong>
-                    </span>
-                    @error('category_id')
+                    @error('team_id')
                     <span class="text-danger" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -139,74 +128,43 @@
 
 @endsection
 
-@section('styles')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endsection
-
 @section('scripts')
 
 <script>
     const base_url = "{{ env('APP_URL') }}";
     const bornDateInput = document.getElementById("born_in");
-        const clubSelect = document.getElementById("clubs");
-        const categorySelect = document.getElementById("available_categories");
+    const clubSelect = document.getElementById("clubs");
+    const categorySelect = document.getElementById("available_categories");
 
-        const token = document.getElementsByName("_token")[1].value;
+    const cleanClubs = () => {
+        clubSelect.innerHTML = `<option selected>Elegí el club</option>`;
+    }
 
-        const clearSelects = () => {
+    const fillClubs = (clubs) => {
+        cleanClubs();
 
-            Array.from(clubSelect.childNodes).forEach(option => {
-                option.selected = false;
-            })
-
+        clubs.forEach(club => {
+            const option = document.createElement("option");
+            option.value = club.id;
+            option.text = `${club.name} | Categoría ${club.category}`;
+            clubSelect.appendChild(option);
             clubSelect.disabled = false;
-            categorySelect.disabled = false;
+        });
+    }
+
+    const onBornDateChange = () => {
+        const bornDate = bornDateInput.value;
+        const regex = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
+
+        if(regex.test(bornDate)){
+            fetch(`${base_url}/dashboard/clubs-by-born-date?born_date=${bornDate}`)
+                .then(response => response.json())
+                .then(clubs => fillClubs(clubs))
+                .catch(error => console.error(error));
         }
+    }
 
-        const drawCategories = (categories) => {
-            categorySelect.disabled = false;
-
-            Array.from(categorySelect.childNodes).forEach(option => {
-                categorySelect.removeChild(option);
-            })
-            const placeholderOption = document.createElement('option');
-            placeholderOption.innerText = "Elegí la categoría";
-            categorySelect.appendChild(placeholderOption);
-
-            Array.from(categories).forEach(category => {
-                const categoryOption = document.createElement('option');
-                categoryOption.value = category.id;
-                categoryOption.innerText = category.name;
-                categorySelect.appendChild(categoryOption);
-            });
-        }
-
-        const getCategories = () => {
-            clubSelect.disabled = false;
-            fetch(`${base_url}/dashboard/players-category`, {
-                method: 'POST',
-                body: JSON.stringify({
-                    'born_in': bornDateInput.value,
-                    "_token": token
-                }),
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(response);
-            }).then(data => {
-                drawCategories(data);
-            }).catch(error => {
-                console.error(error);
-            });
-        }
-
-        bornDateInput.addEventListener("change", clearSelects);
-
-        clubSelect.addEventListener("change", getCategories);
+    bornDateInput.addEventListener("change", onBornDateChange);
 
 </script>
 

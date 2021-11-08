@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSanctionsTable extends Migration
+class AddGroupColumnToGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateSanctionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sanctions', function (Blueprint $table) {
-            $table->id();
-            $table->string('reason');
-            $table->json('player'); //name, id, current_club
-            
-            $table->timestamps();
+        Schema::table('games', function (Blueprint $table) {
+            $table->string('group');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateSanctionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sanctions');
+        Schema::table('games', function (Blueprint $table) {
+            $table->dropColumn('group');
+        });
     }
 }

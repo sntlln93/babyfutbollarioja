@@ -20,4 +20,10 @@ class Category extends Model
     {
         $this->attributes['years'] = json_encode($value);
     }
+
+    //active scope
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 }

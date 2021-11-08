@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tournament extends Model
 {
     protected $guarded = [];
+    protected $casts = [
+        'categories' => 'array',
+        'clubs' => 'array'
+    ];
 
     public function categories()
     {
@@ -28,5 +32,25 @@ class Tournament extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function getVisibilityAttribute()
+    {
+        return $this->is_public ? 'Público' : 'Privado';
+    }
+
+    public function getClubsAttribute($value)
+    {
+        return json_decode($value);
+    }
+
+    public function getCategoriesAttribute($value)
+    {
+        return json_decode($value);
+    }
+
+    public function IsParticipating($clubId)
+    {
+        return collect($this->clubs)->first(fn ($club) => $club->id == $clubId) ? true : false;
     }
 }

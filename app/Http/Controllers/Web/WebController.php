@@ -12,7 +12,7 @@ class WebController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->take(5)->get();
-        $tournament = Tournament::where('is_active', true)->first();
+        $tournament = Tournament::where('is_main', true)->first();
 
         if (!$tournament) {
             return view('web.welcome.unselected')
@@ -21,13 +21,13 @@ class WebController extends Controller
         
         $clubs = Club::all();
 
-        if ($tournament->type->type === 'todos contra todos') {
+        if ($tournament->type === 'todos contra todos') {
             $view = 'web.welcome.league_selected';
         }
-        if ($tournament->type->type === 'fase de grupos') {
+        if ($tournament->type === 'fase de grupos') {
             $view = 'web.welcome.groups_selected';
         }
-        if ($tournament->type->type === 'llaves') {
+        if ($tournament->type === 'llaves') {
             $view = 'web.welcome.playoffs_selected';
         }
 

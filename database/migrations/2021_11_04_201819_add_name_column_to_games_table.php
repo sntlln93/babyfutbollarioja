@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGameSanctionTable extends Migration
+class AddNameColumnToGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateGameSanctionTable extends Migration
      */
     public function up()
     {
-        Schema::create('game_sanction', function (Blueprint $table) {
-            $table->id();
-
-            $table->foreignId('game_id')->constrained();
-            $table->foreignId('sanction_id')->constrained();
-            $table->timestamps();
+        Schema::table('games', function (Blueprint $table) {
+            $table->string('name')->nullable();
         });
     }
 
@@ -29,6 +25,8 @@ class CreateGameSanctionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_sanction');
+        Schema::table('games', function (Blueprint $table) {
+            $table->dropColumn('name');
+        });
     }
 }

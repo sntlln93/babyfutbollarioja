@@ -76,8 +76,8 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" name="categories[]" type="checkbox"
                                 id="category{{ $category->id }}" value="{{ $category->id }}">
-                            <label class="form-check-label"
-                                for="category{{ $category->id }}">{{ $category->name }}</label>
+                            <label class="form-check-label" for="category{{ $category->id }}">{{ $category->name
+                                }}</label>
                         </div>
                         @endforeach
                     </div>
@@ -101,8 +101,9 @@
 
                     <div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="is_private" type="checkbox" id="isPrivate" value="1">
-                            <label class="form-check-label" for="isPrivate">Torneo privado</label>
+                            <input class="form-check-input" name="is_public" type="checkbox" id="isPublic" value="1"
+                                checked>
+                            <label class="form-check-label" for="isPublic">Torneo público</label>
                         </div>
                     </div>
                 </div>
@@ -111,8 +112,8 @@
             <div class="form-row mb-2" id="photoContainer">
                 <div class="col-sm-12">
                     <label for="photo">Foto (<small>Ésta se
-                            mostrará en la página web y funcionara como foto de portada o presentación del
-                            torneo</small>)</label>
+                            mostrará en la página web y será lo primero ue vean los visitantes de la
+                            página.</small>)</label>
 
                     <div class="input-group mb-3">
                         <div class="custom-file">
@@ -140,22 +141,18 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @include('dashboard._partials.validation')
 
 <script>
     const isActive = document.getElementById('isActive');
-    const isPrivate = document.getElementById('isPrivate');
-    const photo = document.getElementById('photoContainer');
+    const isPublic = document.getElementById('isPublic');
 
-    isPrivate.addEventListener('change', () => {
-        photo.style.display = isPrivate.checked ? 'none' : 'block';
-        isActive.checked = isPrivate.checked ? false : true;
+    isPublic.addEventListener('change', () => {
+        isActive.checked = isPublic.checked ? isActive.checked : false;
     });
 
     isActive.addEventListener('change', () => {
-        isPrivate.checked = isActive.checked ? false : isActive.checked;
-        photo.style.display = isPrivate.checked ? 'none' : 'block';
+        isPublic.checked = isActive.checked ? true : isPublic.checked;
     });
 </script>
 @endsection

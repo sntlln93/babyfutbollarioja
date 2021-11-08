@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Services\CreateImageService;
 use App\Services\DeleteImageFromDiskService;
 
 class PlayerController extends Controller
@@ -23,23 +22,18 @@ class PlayerController extends Controller
 
     public function create()
     {
-        $clubs = Club::all();
-
-        return view('dashboard.players.create')
-            ->with('clubs', $clubs);
+        return view('dashboard.players.create');
     }
 
     public function store(Request $request)
     {
-        // dd($request);
         $validatedPlayer = $request->validate([
             'lastname' => 'required',
             'name' => 'required',
-            'dni' => 'required|numeric',
+            'dni' => 'required|digits_between:7,9',
             'born_in' => 'required|date',
             'photo' => 'sometimes|mimes:jpg,jpeg',
-            'club_id' => 'required',
-            'category_id' => 'required',
+            'team_id' => 'required',
         ]);
 
         DB::transaction(function () use ($validatedPlayer) {
@@ -50,15 +44,10 @@ class PlayerController extends Controller
                 'name' => $validatedPlayer['name'],
                 'born_in' => Carbon::parse($validatedPlayer['born_in']),
                 'dni' => $validatedPlayer['dni'],
-                'photo' => $validatedPlayer['photo']->store($base_path, 'public'),
+                'photo' => array_key_exists('photo', $validatedPlayer) ? $validatedPlayer['photo']->store($base_path, 'public') : null,
             ]);
 
-            $team_id = Team::select('id')
-                ->where('category_id', $validatedPlayer['category_id'])
-                ->where('club_id', $validatedPlayer['club_id'])
-                ->first();
-
-            $player->teams()->sync($team_id);
+            $player->teams()->sync($validatedPlayer['team_id']);
         });
 
         return redirect()->route('players.index');

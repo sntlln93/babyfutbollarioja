@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Club;
 use App\Models\Image;
 use App\Models\Phone;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreClubRequest;
 use App\Services\CreateImageService;
 use App\Services\CreatePhoneService;
+use App\Http\Requests\StoreClubRequest;
 use App\Services\CreateTeamsFromClubService;
 use App\Services\DeleteImageFromDiskService;
 
@@ -25,7 +26,9 @@ class ClubController extends Controller
 
     public function create()
     {
-        return view('dashboard.clubs.create');
+        $categories = Category::active()->get();
+
+        return view('dashboard.clubs.create')->with('categories', $categories);
     }
 
     public function store(StoreClubRequest $request)
@@ -33,10 +36,11 @@ class ClubController extends Controller
         DB::transaction(function () use ($request) {
             $validatedClub = $request->validatedClub();
             $validatedPhone = $request->validatedPhone();
+            $categoriesIds = Category::find($request->validatedCategories())->pluck('id');
 
             $club = Club::create($validatedClub);
 
-            (new CreateTeamsFromClubService)->create($club->id);
+            (new CreateTeamsFromClubService)->create($categoriesIds, $club->id);
             (new CreatePhoneService)->create($club, $validatedPhone['area_code'], $validatedPhone['number']);
         });
 

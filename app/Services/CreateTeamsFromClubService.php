@@ -7,11 +7,11 @@ use App\Models\Category;
 
 class CreateTeamsFromClubService
 {
-    public function create($club_id)
+    public function create($categoriesIds, $club_id)
     {
-        $categories = Category::where('is_active', true)->pluck('id');
+        $categoriesIds = $categoriesIds ?? Category::active()->pluck('id');
 
-        foreach ($categories as $category) {
+        foreach ($categoriesIds as $category) {
             Team::create([
                 'club_id' => $club_id,
                 'category_id' => $category
