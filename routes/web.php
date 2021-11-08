@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
 use App\Http\Controllers\Dashboard\AddClubsToTournamentController;
+use App\Http\Controllers\Dashboard\AddFixtureToTournamentController;
 use App\Http\Controllers\Dashboard\ClubController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\PostController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Dashboard\PlayerController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\TournamentController;
 use App\Http\Controllers\Dashboard\FetchCategoriesFromBornDateController;
+use App\Http\Controllers\Dashboard\FetchFilteredGamesFromTournamentController;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -55,4 +57,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     Route::get('tournaments/{tournament}/add-clubs/', [AddClubsToTournamentController::class, 'create'])->name('tournaments.add-teams-form');
     Route::post('tournaments/{tournament}/add-clubs/', [AddClubsToTournamentController::class, 'store'])->name('tournaments.add-teams');
+
+    Route::get('tournaments/{tournament}/add-fixture/', [AddFixtureToTournamentController::class, 'create'])->name('tournaments.add-fixture-form');
+    Route::post('tournaments/{tournament}/add-fixture/', [AddFixtureToTournamentController::class, 'store'])->name('tournaments.add-fixture');
+    Route::get('tournaments/{tournament}/filter', [FetchFilteredGamesFromTournamentController::class, 'get'])->name('tournaments.filter');
 });

@@ -16,14 +16,13 @@ class CreateTournamentsTable extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('photo');
+            
             $table->json('categories');
             $table->json('clubs')->nullable();
-            
-            $table->boolean('has_fixture')->default(false);
-            $table->string('photo');
 
             //visibility
-            $table->boolean('is_main')->default(false);
+            $table->boolean('is_main')->default(null);
             $table->boolean('is_public')->default(false);
 
             //config

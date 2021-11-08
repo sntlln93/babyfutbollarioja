@@ -49,10 +49,13 @@ class TournamentController extends Controller
 
     public function show(Tournament $tournament)
     {
-        $games = Game::where('tournament_id', $tournament->id)->paginate(20);
+        $games = Game::where('tournament_id', $tournament->id)->with('category')->get();
+
+        $dates = $games->map(fn ($game) => $game->group)->unique()->values();
 
         return view('dashboard.tournaments.show')
             ->with('tournament', $tournament)
+            ->with('dates', $dates)
             ->with('games', $games);
     }
 

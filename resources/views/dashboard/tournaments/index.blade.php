@@ -35,7 +35,7 @@
                         $tournament->visibility }}</span></td>
                 <td>
                     @foreach ($tournament->categories as $category)
-                    <span class="badge badge-primary">{{ $category['name'] }}</span>
+                    <span class="badge badge-primary">{{ $category->name }}</span>
                     @endforeach
                 </td>
                 <td>{{ $tournament->created_at->diffForHumans() }}</td>

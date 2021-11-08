@@ -44,6 +44,11 @@ class Tournament extends Model
         return json_decode($value);
     }
 
+    public function getCategoriesAttribute($value)
+    {
+        return json_decode($value);
+    }
+
     public function IsParticipating($clubId)
     {
         return collect($this->clubs)->first(fn ($club) => $club->id == $clubId) ? true : false;
