@@ -1,23 +1,24 @@
 <?php
 
+use App\Models\Category;
+
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Web\WebController;
-use App\Http\Controllers\Web\ShowPostController;
-use App\Http\Controllers\Web\ShowTournamentController;
 use App\Http\Controllers\Web\ShowRegulations;
-
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 
-use App\Http\Controllers\Dashboard\AddClubsToTournamentController;
-use App\Http\Controllers\Dashboard\AddFixtureToTournamentController;
+use App\Http\Controllers\Web\ShowPostController;
 use App\Http\Controllers\Dashboard\ClubController;
+
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\PlayerController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Web\ShowTournamentController;
 use App\Http\Controllers\Dashboard\TournamentController;
+use App\Http\Controllers\Dashboard\AddClubsToTournamentController;
+use App\Http\Controllers\Dashboard\AddFixtureToTournamentController;
 use App\Http\Controllers\Dashboard\FetchCategoriesFromBornDateController;
 use App\Http\Controllers\Dashboard\FetchFilteredGamesFromTournamentController;
 
@@ -51,14 +52,16 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('tournaments', TournamentController::class);
     Route::resource('categories', CategoryController::class)->except('edit', 'update', 'show');
     Route::resource('clubs', ClubController::class);
-    Route::resource('players', PlayerController::class);
     Route::resource('posts', PostController::class);
-    Route::post('players-category', [FetchCategoriesFromBornDateController::class, 'get']);
+    Route::resource('players', PlayerController::class);
+
+    Route::get('clubs-by-born-date', [FetchTeamsFromBornDateController::class, 'get']);
 
     Route::get('tournaments/{tournament}/add-clubs/', [AddClubsToTournamentController::class, 'create'])->name('tournaments.add-teams-form');
     Route::post('tournaments/{tournament}/add-clubs/', [AddClubsToTournamentController::class, 'store'])->name('tournaments.add-teams');
 
     Route::get('tournaments/{tournament}/add-fixture/', [AddFixtureToTournamentController::class, 'create'])->name('tournaments.add-fixture-form');
     Route::post('tournaments/{tournament}/add-fixture/', [AddFixtureToTournamentController::class, 'store'])->name('tournaments.add-fixture');
+    
     Route::get('tournaments/{tournament}/filter', [FetchFilteredGamesFromTournamentController::class, 'get'])->name('tournaments.filter');
 });

@@ -21,13 +21,13 @@ class WebController extends Controller
         
         $clubs = Club::all();
 
-        if ($tournament->type->type === 'todos contra todos') {
+        if ($tournament->type === 'todos contra todos') {
             $view = 'web.welcome.league_selected';
         }
-        if ($tournament->type->type === 'fase de grupos') {
+        if ($tournament->type === 'fase de grupos') {
             $view = 'web.welcome.groups_selected';
         }
-        if ($tournament->type->type === 'llaves') {
+        if ($tournament->type === 'llaves') {
             $view = 'web.welcome.playoffs_selected';
         }
 
