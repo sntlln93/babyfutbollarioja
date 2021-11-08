@@ -141,7 +141,6 @@
     }
 
     const createOption = (club) => {
-        console.log(club);
         const option = document.createElement("option");
         option.value = club.id;
         option.text = `${club.name} | Categoría ${club.category}`;
