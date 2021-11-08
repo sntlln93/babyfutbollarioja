@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Services\CreateImageService;
 use App\Services\DeleteImageFromDiskService;
 
 class PlayerController extends Controller
@@ -31,7 +30,6 @@ class PlayerController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
         $validatedPlayer = $request->validate([
             'lastname' => 'required',
             'name' => 'required',
