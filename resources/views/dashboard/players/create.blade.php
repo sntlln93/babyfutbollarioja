@@ -140,15 +140,21 @@
         clubSelect.innerHTML = `<option selected>Elegí el club</option>`;
     }
 
+    const createOption = (club) => {
+        console.log(club);
+        const option = document.createElement("option");
+        option.value = club.id;
+        option.text = `${club.name} | Categoría ${club.category}`;
+        clubSelect.appendChild(option);
+        clubSelect.disabled = false;
+    }
+
     const fillClubs = (clubs) => {
         cleanClubs();
-
+        clubs = Array.isArray(clubs) ? clubs : Object.values(clubs);
+       
         clubs.forEach(club => {
-            const option = document.createElement("option");
-            option.value = club.id;
-            option.text = `${club.name} | Categoría ${club.category}`;
-            clubSelect.appendChild(option);
-            clubSelect.disabled = false;
+            createOption(club);
         });
     }
 
