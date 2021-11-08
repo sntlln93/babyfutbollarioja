@@ -19,7 +19,7 @@ use App\Http\Controllers\Web\ShowTournamentController;
 use App\Http\Controllers\Dashboard\TournamentController;
 use App\Http\Controllers\Dashboard\AddClubsToTournamentController;
 use App\Http\Controllers\Dashboard\AddFixtureToTournamentController;
-use App\Http\Controllers\Dashboard\FetchCategoriesFromBornDateController;
+use App\Http\Controllers\Dashboard\FetchTeamsFromBornDateController;
 use App\Http\Controllers\Dashboard\FetchFilteredGamesFromTournamentController;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
