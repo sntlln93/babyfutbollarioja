@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
+    protected $fillable = [
+        'local_score',
+        'away_score',
+    ];
+
     protected $casts = [
         'local' => 'object',
         'away' => 'object',
@@ -19,5 +24,10 @@ class Game extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
     }
 }

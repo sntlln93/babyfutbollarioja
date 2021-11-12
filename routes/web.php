@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Category;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\WebController;
 use App\Http\Controllers\Web\ShowRegulations;
@@ -21,6 +19,9 @@ use App\Http\Controllers\Dashboard\AddClubsToTournamentController;
 use App\Http\Controllers\Dashboard\AddFixtureToTournamentController;
 use App\Http\Controllers\Dashboard\FetchTeamsFromBornDateController;
 use App\Http\Controllers\Dashboard\FetchFilteredGamesFromTournamentController;
+use App\Http\Controllers\Dashboard\FetchPlayersFromTeamController;
+use App\Http\Controllers\Dashboard\EndGameController;
+use App\Http\Controllers\Dashboard\ShowGameController;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -64,4 +65,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('tournaments/{tournament}/add-fixture/', [AddFixtureToTournamentController::class, 'store'])->name('tournaments.add-fixture');
     
     Route::get('tournaments/{tournament}/filter', [FetchFilteredGamesFromTournamentController::class, 'get'])->name('tournaments.filter');
+
+    Route::get('games/{game}', [ShowGameController::class, 'show'])->name('games.show');
+    Route::get('games/{game}/end', [EndGameController::class, 'form'])->name('games.end-form');
+    Route::put('games/{game}/end', [EndGameController::class, 'update'])->name('games.end');
+
+    Route::get('teams/{team}/players', [FetchPlayersFromTeamController::class, 'get'])->name('teams.players');
 });

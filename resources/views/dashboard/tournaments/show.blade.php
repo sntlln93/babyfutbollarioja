@@ -78,20 +78,26 @@
                 <td>{{ $game->group }}</td>
                 <td>{{ $game->name }}</td>
                 <td>
-                    @if($game->local_score && $game->away_score)
-                    {{ $game->local_score - $game->away_score }}
+                    @if(is_int($game->local_score) && is_int($game->away_score))
+                    <h4><span class="badge badge-success">
+                            {{ $game->local_score }} - {{ $game->away_score }}
+                        </span></h4>
                     @else
-                    <span class="badge badge-info">
+                    <span class="badge badge-warning">
                         <i class="fas fa-clock"></i>
                         Pendiente
                     </span>
                     @endif
                 </td>
-                <td class="text-center">
-                    <a href="#" class="btn btn-primary"><i class="fas fa-futbol"></i></a>
+                <td>
+                    <a href="{{ route('games.end-form', ['game' => $game->id]) }}"
+                        class="btn btn-sm btn-primary {{ is_int($game->local_score) && is_int($game->away_score) ? 'disabled' : '' }}">
+                        <i class="fas fa-futbol"></i>
+                    </a>
                 </td>
-                <td class="text-center">
-                    <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                <td>
+                    <a href="{{ route('games.show', ['game' => $game->id]) }}" class="btn btn-sm btn-info"><i
+                            class="fas fa-eye"></i></a>
                 </td>
             </tr>
             @empty
@@ -144,6 +150,12 @@
         font-weight: bold;
         border: 1px solid rgba(204, 204, 204, 0.8);
     }
+
+    td:nth-child(5),
+    td:nth-child(6),
+    td:nth-child(7) {
+        text-align: center;
+    }
 </style>
 @endsection
 
@@ -152,6 +164,8 @@
     let categoryFilter = "";
     let dateFilter = "";
     const filterUrl = "{{ route('tournaments.filter', ['tournament' => $tournament->id]) }}";
+    const endGameUrl = "{{ route('games.end', ['game' => ':game']) }}";
+    const showGameUrl = "{{ route('games.show', ['game' => ':game']) }}";
 
     const showLoading = (isLoading, element) => {
         if(isLoading) {
@@ -171,13 +185,15 @@
     const createRow = (game, index) => {
         //order, category, group, name, result, btn, btn
         const row = document.createElement('tr');
+        const resultBadge = `<h4><span class="badge badge-success">${game.local_score} - ${game.away_score}</span></h4>`;
+        const pendingBadge = `<span class="badge badge-warning"><i class="fas fa-clock"></i> Pendiente</span>`;
         row.appendChild(createColumn(index + 1));
         row.appendChild(createColumn(game.category.name));
         row.appendChild(createColumn(game.group));
         row.appendChild(createColumn(game.name));
-        row.appendChild(createColumn(game.local_score && game.away_score ? game.local_score - game.away_score : `<span class="badge badge-info"><i class="fas fa-clock"></i> Pendiente</span>`)); 
-        row.appendChild(createColumn(`<a href="#" class="btn btn-primary"><i class="fas fa-futbol"></i></a>`));
-        row.appendChild(createColumn(`<a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>`));
+        row.appendChild(createColumn(Number.isInteger(game.local_score) && Number.isInteger(game.away_score) ? resultBadge : pendingBadge)); 
+        row.appendChild(createColumn(`<a href="${endGameUrl.replace(':game', game.id)}/" class="btn btn-sm btn-primary"><i class="fas fa-futbol"></i></a>`));
+        row.appendChild(createColumn(`<a href="${showGameUrl.replace(':game', game.id)}/" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>`));
 
         return row;
     }

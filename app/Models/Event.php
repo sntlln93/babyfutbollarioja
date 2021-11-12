@@ -8,8 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    private $icons = [
+        'goal' => 'fas fa-futbol',
+        'green' => 'fas fa-square text-green',
+        'red' => 'fas fa-square text-danger',
+        'yellow' => 'fas fa-square text-warning',
+    ];
+
     protected $casts = [
-        'player' => 'json'
+        'player' => 'object'
     ];
 
     public function game()
@@ -17,21 +24,13 @@ class Event extends Model
         return $this->belongsTo(Game::class);
     }
 
-    public function getTypeAttribute($value)
+    public function team()
     {
-        return Str::title($value);
+        return $this->belongsTo(Team::class);
     }
 
     public function getIconAttribute()
     {
-        if ($this->type == "Gol") {
-            return asset('img/gol.svg');
-        } elseif ($this->type == "Tarjeta Verde") {
-            return asset('img/green.svg');
-        } elseif ($this->type == "Tarjeta Roja") {
-            return asset('img/red.svg');
-        }
-
-        return asset('img/yellow.svg');
+        return $this->icons[$this->type];
     }
 }
