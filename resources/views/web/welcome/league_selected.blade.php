@@ -1,9 +1,31 @@
 @extends('web.welcome.welcome_partial')
 
-@include('web.welcome._hero')
+@section('styles')
+<style>
+    .scoreboard th:first-child,
+    .scoreboard td:first-child {
+        position: sticky;
+        left: 0px;
+        z-index: 1;
+        width: 200px;
+    }
+
+    .scoreboard tr:nth-child(odd)>td {
+        background-color: #222;
+    }
+
+    .scoreboard tr:nth-child(even)>td {
+        background-color: #222;
+    }
+
+    .scoreboard tr:nth-child(odd)>th {
+        background-color: #121212;
+    }
+</style>
 
 @section('tournament_info')
-{{-- <div class="dark-home">
+@include('web.welcome._hero')
+<div class="dark-home">
     <div class="container">
         <div class="row">
             <!-- Left Content - Tabs and Carousel -->
@@ -11,7 +33,7 @@
                 <!-- Nav Tabs -->
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active"><a href="#statistics" data-toggle="tab">Estadísticas</a></li>
-                    <li><a href="#groups" data-toggle="tab">Próximos partidos</a></li>
+                    <li><a href="#groups" data-toggle="tab">Tabla de posiciones</a></li>
                 </ul>
                 <!-- End Nav Tabs -->
 
@@ -25,117 +47,28 @@
                         @endforeach
                     </div>
                     <!-- Tab Theree - statistics -->
-                    <div class="tab-pane active" id="statistics">
+                    <div class="tab-pane active pb-5" id="statistics">
                         <div class="row">
                             <!-- Club Ranking -->
                             <div class="col-lg-4">
                                 <div class="club-ranking">
-                                    <h5><a href="#">Posiciones</a></h5>
+                                    <h5><a href="#">Top 10</a></h5>
                                     <div class="info-ranking">
                                         <ul>
+                                            @foreach ($scoreboard as $row)
                                             <li>
                                                 <span class="position">
-                                                    1
+                                                    {{ $loop->iteration }}
                                                 </span>
                                                 <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Russia
+                                                    <img src="{{ asset('storage/'.$row['team']->logo) }}" alt="">
+                                                    {{ $row['team']->name }}
                                                 </a>
                                                 <span class="points">
-                                                    90
+                                                    {{ $row['points'] }}
                                                 </span>
                                             </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    2
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Saudi Arabia
-                                                </a>
-                                                <span class="points">
-                                                    86
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    3
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Egypt
-                                                </a>
-                                                <span class="points">
-                                                    84
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    4
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Uruguay
-                                                </a>
-                                                <span class="points">
-                                                    70
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    5
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Portugal
-                                                </a>
-                                                <span class="points">
-                                                    67
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    6
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Spain
-                                                </a>
-                                                <span class="points">
-                                                    60
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    7
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Morocco
-                                                </a>
-                                                <span class="points">
-                                                    90
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    8
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    IR Iran
-                                                </a>
-                                                <span class="points">
-                                                    53
-                                                </span>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -148,72 +81,29 @@
                                     <h5><a href="group-list.html">Partidos recientes</a></h5>
                                     <div class="info-results">
                                         <ul>
+                                            @foreach ($recentGames as $game)
                                             <li>
                                                 <span class="head">
-                                                    Portugal Vs Spain <span class="date">27 Jun 2017</span>
+                                                    {{ $game->name }}
                                                 </span>
 
-                                                <div class="goals-result">
-                                                    <a href="single-team.html">
-                                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                        Portugal
-                                                    </a>
+                                                <div class="goals-result d-flex flex-column justify-content-around">
+                                                    <h5 class="text-center">{{ $game->group }}</h5>
+                                                    <div class="goals-result align-items-center py-0">
+                                                        <img style="width: 4em ;"
+                                                            src="{{ asset('storage/'.$game->local->logo) }}" alt="">
 
-                                                    <span class="goals">
-                                                        <b>2</b> - <b>3</b>
-                                                    </span>
+                                                        <span class="goals">
+                                                            <b>{{ $game->local_score }}</b> - <b>{{ $game->away_score
+                                                                }}</b>
+                                                        </span>
 
-                                                    <a href="single-team.html">
-                                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                        Spain
-                                                    </a>
+                                                        <img style="width: 4em ;"
+                                                            src="{{ asset('storage/'.$game->away->logo) }}" alt="">
+                                                    </div>
                                                 </div>
                                             </li>
-
-                                            <li>
-                                                <span class="head">
-                                                    Rusia Vs Colombia <span class="date">30 Jun 2017</span>
-                                                </span>
-
-                                                <div class="goals-result">
-                                                    <a href="single-team.html">
-                                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                        Rusia
-                                                    </a>
-
-                                                    <span class="goals">
-                                                        <b>2</b> - <b>3</b>
-                                                    </span>
-
-                                                    <a href="single-team.html">
-                                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                        Colombia
-                                                    </a>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <span class="head">
-                                                    Uruguay Vs Portugal <span class="date">31 Jun
-                                                        2017</span>
-                                                </span>
-
-                                                <div class="goals-result">
-                                                    <a href="single-team.html">
-                                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                        Uruguay
-                                                    </a>
-
-                                                    <span class="goals">
-                                                        <b>2</b> - <b>3</b>
-                                                    </span>
-
-                                                    <a href="single-team.html">
-                                                        <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                        Portugal
-                                                    </a>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -223,112 +113,23 @@
                             <!-- Top player -->
                             <div class="col-lg-4">
                                 <div class="player-ranking">
-                                    <h5><a href="group-list.html">Fairplay</a></h5>
+                                    <h5><a href="group-list.html">Goleadores</a></h5>
                                     <div class="info-player">
                                         <ul>
+                                            @foreach ($topScorers as $scorer)
                                             <li>
                                                 <span class="position">
-                                                    1
+                                                    {{ $loop->iteration }}
                                                 </span>
                                                 <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Russia
+                                                    <img src="{{ asset('storage/'.$scorer->logo) }}" alt="">
+                                                    {{ $scorer->player->name }}
                                                 </a>
                                                 <span class="points">
-                                                    0
+                                                    {{ $scorer->goals }}
                                                 </span>
                                             </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    2
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Saudi Arabia
-                                                </a>
-                                                <span class="points">
-                                                    1
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    3
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Egypt
-                                                </a>
-                                                <span class="points">
-                                                    1
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    4
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Uruguay
-                                                </a>
-                                                <span class="points">
-                                                    7
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    5
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Portugal
-                                                </a>
-                                                <span class="points">
-                                                    8
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    6
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Spain
-                                                </a>
-                                                <span class="points">
-                                                    8
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    7
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    Morocco
-                                                </a>
-                                                <span class="points">
-                                                    9
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <span class="position">
-                                                    8
-                                                </span>
-                                                <a href="single-team.html">
-                                                    <img src="{{ asset('Barcelona_FC_logo.svg') }}" alt="">
-                                                    IR Iran
-                                                </a>
-                                                <span class="points">
-                                                    13
-                                                </span>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -339,292 +140,64 @@
                     <!-- Tab Theree - statistics -->
 
                     <!-- Tab One - Groups List -->
-                    <div class="tab-pane" id="groups">
-                        <div class="groups-list">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6">
-                                    <h5><a href="groups.html">GROUP A</a></h5>
-                                    <div class="item-group">
-                                        <ul>
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/rusia.png" alt="">
-                                                    Russia
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/arabia.png" alt="">
-                                                    Saudi Arabia
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/egy.png" alt="">
-                                                    Egypt
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/uru.png" alt="">
-                                                    Uruguay
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                    <div class="tab-pane pb-5" id="groups">
+                        <h5 class="h5 text-white">Tabla de posiciones</h5>
+                        <table class="table-responsive mb-2 text-white scoreboard" style="background-color: #222">
+                            <thead>
+                                <tr>
+                                    <th class="text-white">Equipo</th>
+                                    <th class="text-white">PJ</th>
+                                    <th class="text-white">G</th>
+                                    <th class="text-white">E</th>
+                                    <th class="text-white">P</th>
+                                    <th class="text-white">GF</th>
+                                    <th class="text-white">GC</th>
+                                    <th class="text-white">DG</th>
+                                    <th class="text-white">Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($scoreboard as $row)
+                                <tr>
+                                    <td>
+                                        <span class="mr-2">{{ $loop->iteration }}</span>
+                                        {{ $row['team']->name}}
+                                    </td>
+                                    <td>{{ $row['gp'] }}</td>
+                                    <td>{{ $row['w'] }}</td>
+                                    <td>{{ $row['d'] }}</td>
+                                    <td>{{ $row['l'] }}</td>
+                                    <td>{{ $row['gf'] }}</td>
+                                    <td>{{ $row['ga'] }}</td>
+                                    <td>{{ $row['gd'] }}</td>
+                                    <td>{{ $row['points'] }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{-- <div class="row px-4"
+                            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));">
+                            @foreach ($nextGames as $game)
+                            <div class="card bg-dark px-0 mx-2 mb-2 border-0">
+                                <div class="card-header text-white" style="background-color: #121212">{{ $game->name }}
                                 </div>
+                                <div class="card-body text-center" style="background-color: #222">
+                                    <h5 class="text-center text-white">{{ $game->group }}</h5>
+                                    <div class="d-flex justify-content-around align-items-center">
+                                        <img style="width: 5em ;" src="{{ asset('storage/'.$game->local->logo) }}"
+                                            alt="">
 
-                                <div class="col-lg-3 col-md-6">
-                                    <h5><a href="groups.html">GROUP B</a></h5>
-                                    <div class="item-group">
-                                        <ul>
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/por.png" alt="">
-                                                    Portugal
-                                                </a>
-                                            </li>
+                                        <span class="badge badge-dark" style="background-color: #121212; padding: 1em;">
+                                            <b>vs</b>
+                                        </span>
 
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/esp.png" alt="">
-                                                    Spain
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/mar.png" alt="">
-                                                    Morocco
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/irn.png" alt="">
-                                                    IR Iran
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6">
-                                    <h5><a href="group-list.html">GROUP C</a></h5>
-                                    <div class="item-group">
-                                        <ul>
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/fra.png" alt="">
-                                                    France
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/aus.png" alt="">
-                                                    Australia
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/per.png" alt="">
-                                                    Peru
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/den.png" alt="">
-                                                    Denmark
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6">
-                                    <h5><a href="group-list.html">GROUP D</a></h5>
-                                    <div class="item-group">
-                                        <ul>
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/arg.png" alt="">
-                                                    Argentina
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/isl.png" alt="">
-                                                    Iceland
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/cro.png" alt="">
-                                                    Croatia
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/nga.png" alt="">
-                                                    Nigeria
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        <img style="width: 5em ;" src="{{ asset('storage/'.$game->away->logo) }}"
+                                            alt="">
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6">
-                                    <h5><a href="group-list-html">GROUP E</a></h5>
-                                    <div class="item-group">
-                                        <ul>
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/bra.png" alt="">
-                                                    Brazil
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/sui.png" alt="">
-                                                    Switzerland
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/costa-rica.png" alt="">
-                                                    Costa rica
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/srb.png" alt="">
-                                                    Serbia
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6">
-                                    <h5><a href="group-list-html">GROUP F</a></h5>
-                                    <div class="item-group">
-                                        <ul>
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/ger.png" alt="">
-                                                    Germany
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/mex.png" alt="">
-                                                    Mexico
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/swe.png" alt="">
-                                                    Sweden
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/kor.png" alt="">
-                                                    Korea Rep
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6">
-                                    <h5><a href="group-list-html">GROUP G</a></h5>
-                                    <div class="item-group">
-                                        <ul>
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/bel.png" alt="">
-                                                    Belgium
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/pan.png" alt="">
-                                                    Panama
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/tun.png" alt="">
-                                                    Tunisia
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/eng.png" alt="">
-                                                    England
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6">
-                                    <h5><a href="group-list-html">GROUP H</a></h5>
-                                    <div class="item-group">
-                                        <ul>
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/pol.png" alt="">
-                                                    Poland
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/sen.png" alt="">
-                                                    Senegal
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/colombia.png" alt="">
-                                                    Colombia
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="single-team.html">
-                                                    <img src="img/clubs-logos/japan.png" alt="">
-                                                    Japan
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        </div> --}}
                     </div>
                     <!-- End Tab One - Groups List -->
                 </div>
@@ -633,12 +206,12 @@
             <!-- Left Content - Tabs and Carousel -->
 
             <!-- Right Content - Content Counter -->
-            <div class="col-xl-3 col-md-12">
+            {{-- <div class="col-xl-3 col-md-12">
                 <img src="{{ asset('chilecito_v.png') }}" alt="" class="img-hover">
                 <!-- Content Counter -->
-            </div>
+            </div> --}}
             <!-- End Right Content - Content Counter -->
         </div>
     </div>
-</div> --}}
+</div>
 @endsection
