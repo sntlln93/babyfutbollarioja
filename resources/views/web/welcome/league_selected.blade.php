@@ -52,7 +52,7 @@
                             <!-- Club Ranking -->
                             <div class="col-lg-4">
                                 <div class="club-ranking">
-                                    <h5><a href="#">Top 10</a></h5>
+                                    <h5><a href="#">Posiciones</a></h5>
                                     <div class="info-ranking">
                                         <ul>
                                             @foreach ($scoreboard as $row)
