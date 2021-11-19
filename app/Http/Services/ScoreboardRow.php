@@ -24,21 +24,9 @@ class ScoreboardRow
             'gd' => isset($row['gd']) ? $row['gd'] + $teamScore - $oponentScore : $teamScore - $oponentScore,
             'pts' => isset($row['pts']) ? $row['pts'] + $points : $points,
             'gp' => isset($row['gp']) ? $row['gp'] + 1 : 1,
-            'w' => $wins ?? 0,
-            'd' => $draws ?? 0,
-            'l' => $losses ?? 0,
-            'points' => $points,
+            'w' => $wins ?? ($row['w'] ?? 0),
+            'd' => $draws ?? ($row['d'] ?? 0),
+            'l' => $losses ?? ($row['l'] ?? 0),
         ];
     }
 }
-
-            // $scoreboard[$game->away->id] = [
-            //     'team' => $game->away,
-            //     'points' => $awayPoints,
-            //     'gf' => isset($scoreboard[$game->away->id]['gf']) ? $scoreboard[$game->away->id]['gf'] + $game->away_score : $game->away_score,
-            //     'ga' => isset($scoreboard[$game->away->id]['ga']) ? $scoreboard[$game->away->id]['ga'] + $game->local_score : $game->local_score,
-            //     'gd' => isset($scoreboard[$game->away->id]['gd']) ? $game->away_score - $game->local_score : $scoreboard[$game->away->id]['gf'] - $scoreboard[$game->away->id]['ga'],
-            //     'w' => isset($scoreboard[$game->away->id]['w']) ? $scoreboard[$game->away->id]['w'] + 1 : 1,
-            //     'd' => 0,
-            //     'l' => 0,
-            // ];

@@ -1,5 +1,6 @@
 @extends('web.welcome.welcome_partial')
-
+@php
+@endphp
 @section('styles')
 <style>
     .scoreboard th:first-child,
@@ -34,6 +35,7 @@
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active"><a href="#statistics" data-toggle="tab">Estadísticas</a></li>
                     <li><a href="#groups" data-toggle="tab">Tabla de posiciones</a></li>
+                    {{-- <li><a href="#fixture" data-toggle="tab">Fixture</a></li> --}}
                 </ul>
                 <!-- End Nav Tabs -->
 
@@ -46,7 +48,7 @@
                             {{ $category->name }}</button>
                         @endforeach
                     </div>
-                    <!-- Tab Theree - statistics -->
+                    <!-- Tab One - statistics -->
                     <div class="tab-pane active pb-5" id="statistics">
                         <div class="row">
                             <!-- Club Ranking -->
@@ -65,7 +67,7 @@
                                                     {{ $row['team']->name }}
                                                 </a>
                                                 <span class="points">
-                                                    {{ $row['points'] }}
+                                                    {{ $row['pts'] }}
                                                 </span>
                                             </li>
                                             @endforeach
@@ -137,9 +139,9 @@
                             <!-- End Top player -->
                         </div>
                     </div>
-                    <!-- Tab Theree - statistics -->
+                    <!-- Tab One - statistics -->
 
-                    <!-- Tab One - Groups List -->
+                    <!-- Tab Two - Scoreboard List -->
                     <div class="tab-pane pb-5" id="groups">
                         <h5 class="h5 text-white">Tabla de posiciones</h5>
                         <table class="table-responsive mb-2 text-white scoreboard" style="background-color: #222">
@@ -170,36 +172,39 @@
                                     <td>{{ $row['gf'] }}</td>
                                     <td>{{ $row['ga'] }}</td>
                                     <td>{{ $row['gd'] }}</td>
-                                    <td>{{ $row['points'] }}</td>
+                                    <td>{{ $row['pts'] }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- <div class="row px-4"
-                            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));">
-                            @foreach ($nextGames as $game)
-                            <div class="card bg-dark px-0 mx-2 mb-2 border-0">
-                                <div class="card-header text-white" style="background-color: #121212">{{ $game->name }}
-                                </div>
-                                <div class="card-body text-center" style="background-color: #222">
-                                    <h5 class="text-center text-white">{{ $game->group }}</h5>
-                                    <div class="d-flex justify-content-around align-items-center">
-                                        <img style="width: 5em ;" src="{{ asset('storage/'.$game->local->logo) }}"
-                                            alt="">
-
-                                        <span class="badge badge-dark" style="background-color: #121212; padding: 1em;">
-                                            <b>vs</b>
-                                        </span>
-
-                                        <img style="width: 5em ;" src="{{ asset('storage/'.$game->away->logo) }}"
-                                            alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div> --}}
                     </div>
-                    <!-- End Tab One - Groups List -->
+                    <!-- End Tab Two - Scoreboard List -->
+
+                    <!-- Tab Three - Fixture -->
+                    {{-- <div class="tab-pane pb-5" id="fixture">
+                        <h5 class="h5 text-white">Fixtures</h5>
+                        <table class="table-responsive mb-2 text-white scoreboard" style="background-color: #222">
+                            <thead>
+                                <tr>
+                                    <th class="text-white">
+                                    </th>
+                                    @foreach ($tournament->clubs as $team)
+                                    <th class="text-white">{{ $team->name }}</th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($fixture as $row)
+                                <tr>
+                                    @foreach ($row as $col)
+                                    <th>{{ $col }}</th>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div> --}}
+                    <!-- End Tab Three - Fixture -->
                 </div>
                 <!-- Content Tabs -->
             </div>

@@ -46,9 +46,10 @@ class WebController extends Controller
             ->take(3)
             ->get();
 
-        $games = $tournament->games->whereNotNull('local_score')->whereNotNull('away_score');
+        $games = $tournament->games;
+        $playedGames = $games->whereNotNull('local_score')->whereNotNull('away_score');
 
-        foreach ($games as $game) {
+        foreach ($playedGames as $game) {
             $scoreboard[$game->local->id] =(new ScoreboardRow)->get($game->local, $game->local_score, $game->away_score, $scoreboard[$game->local->id] ?? []);
             $scoreboard[$game->away->id] =(new ScoreboardRow)->get($game->away, $game->away_score, $game->local_score, $scoreboard[$game->away->id] ?? []);
         }
@@ -65,7 +66,7 @@ class WebController extends Controller
 
         return view($view)
             ->with('tournament', $tournament)
-            ->with('scoreboard', collect($scoreboard)->sortByDesc('points'))
+            ->with('scoreboard', collect($scoreboard)->sortByDesc('pts'))
             ->with('topScorers', $topScorers)
             ->with('recentGames', $recentGames)
             ->with('nextGames', $nextGames)
