@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\Event;
 use App\Models\Tournament;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ScoreboardRow;
 
@@ -33,6 +35,23 @@ class ShowTournamentController extends Controller
 
         return view('web.tournaments.fixture')
         ->with('dates', $dates)
+        ->with('tournament', $tournament);
+    }
+
+    public function scorers(Tournament $tournament)
+    {
+        $topScorers = Event::query()
+            ->selectRaw('count(type) as goals, player as player, clubs.name as team, clubs.logo as logo')
+            ->join('teams', DB::raw("JSON_EXTRACT(events.player, '$.teamId')"), '=', 'teams.id')
+            ->join('clubs', 'clubs.id', '=', 'teams.club_id')
+            ->whereIn('game_id', $tournament->games->pluck('id'))
+            ->where('type', 'goal')
+            ->groupBy('player', 'type', 'logo', 'team')
+            ->orderByDesc('goals')
+            ->get();
+
+        return view('web.tournaments.top-scorers')
+        ->with('topScorers', $topScorers)
         ->with('tournament', $tournament);
     }
 }

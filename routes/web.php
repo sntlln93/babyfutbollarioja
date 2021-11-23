@@ -40,6 +40,7 @@ Route::name('web.')->group(function () {
     Route::get('/tournaments', [ShowTournamentController::class, 'index'])->name('tournaments');
     Route::get('/tournaments/{tournament}', [ShowTournamentController::class, 'show'])->name('tournament');
     Route::get('/tournaments/{tournament}/scoreboard', [ShowTournamentController::class, 'scoreboard'])->name('tournament.scoreboard');
+    Route::get('/tournaments/{tournament}/scorers', [ShowTournamentController::class, 'scorers'])->name('tournament.scorers');
     Route::get('/tournaments/{tournament}/fixture', [ShowTournamentController::class, 'fixture'])->name('tournament.fixture');
 
     Route::get('posts', [ShowPostController::class, 'index'])->name('post.index');
