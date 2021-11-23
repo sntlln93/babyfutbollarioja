@@ -54,7 +54,9 @@
                             <!-- Club Ranking -->
                             <div class="col-lg-4">
                                 <div class="club-ranking">
-                                    <h5><a href="#">Posiciones</a></h5>
+                                    <h5><a
+                                            href="{{ route('web.tournament.scoreboard', ['tournament' => $tournament->id]) }}">Posiciones</a>
+                                    </h5>
                                     <div class="info-ranking">
                                         <ul>
                                             @foreach ($scoreboard as $row)
@@ -80,7 +82,9 @@
                             <!-- recent-results -->
                             <div class="col-lg-4">
                                 <div class="recent-results">
-                                    <h5><a href="group-list.html">Partidos recientes</a></h5>
+                                    <h5><a
+                                            href="{{ route('web.tournament.fixture', ['tournament' => $tournament->id]) }}">Partidos
+                                            recientes</a></h5>
                                     <div class="info-results">
                                         <ul>
                                             @foreach ($recentGames as $game)
@@ -115,7 +119,9 @@
                             <!-- Top player -->
                             <div class="col-lg-4">
                                 <div class="player-ranking">
-                                    <h5><a href="group-list.html">Goleadores</a></h5>
+                                    <h5><a
+                                            href="{{ route('web.tournament.scorers', ['tournament' => $tournament->id]) }}">Goleadores</a>
+                                    </h5>
                                     <div class="info-player">
                                         <ul>
                                             @foreach ($topScorers as $scorer)
@@ -143,7 +149,9 @@
 
                     <!-- Tab Two - Scoreboard List -->
                     <div class="tab-pane pb-5" id="groups">
-                        <h5 class="h5 text-white">Tabla de posiciones</h5>
+                        <h5 class="h5"><a class="text-white"
+                                href="{{ route('web.tournament.scoreboard', ['tournament' => $tournament->id]) }}">Tabla
+                                de posiciones</a></h5>
                         <table class="table-responsive mb-2 text-white scoreboard" style="background-color: #222">
                             <thead>
                                 <tr>
