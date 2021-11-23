@@ -45,6 +45,8 @@
     <script type="text/javascript" src="{{ asset('web/js/theme-main.js') }}"></script>
     <!-- ======================= End JQuery libs =========================== -->
 
+    @yield('scripts')
+
 </body>
 
 </html>
