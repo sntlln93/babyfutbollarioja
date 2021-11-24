@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Game;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
