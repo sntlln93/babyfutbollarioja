@@ -64,7 +64,7 @@
                                                 <span class="position">
                                                     {{ $loop->iteration }}
                                                 </span>
-                                                <a href="single-team.html">
+                                                <a href="{{ route('web.team.show', ['team' => $row['team']->id]) }}">
                                                     <img src="{{ asset('storage/'.$row['team']->logo) }}" alt="">
                                                     {{ $row['team']->name }}
                                                 </a>
@@ -171,7 +171,10 @@
                                 <tr>
                                     <td>
                                         <span class="mr-2">{{ $loop->iteration }}</span>
-                                        {{ $row['team']->name}}
+                                        <a class="text-white"
+                                            href="{{ route('web.team.show', ['team' => $row['team']->id]) }}">
+                                            {{ $row['team']->name}}
+                                        </a>
                                     </td>
                                     <td>{{ $row['gp'] }}</td>
                                     <td>{{ $row['w'] }}</td>
