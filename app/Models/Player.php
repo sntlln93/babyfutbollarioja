@@ -21,20 +21,15 @@ class Player extends Model
         return $this->name . ' ' . $this->lastname;
     }
 
+    public function getPhotoAttribute($value)
+    {
+        return $value ? asset('storage/' . $value) : asset('img/player_placeholder.svg');
+    }
+
     public function teams()
     {
         return $this->belongsToMany(Team::class)->withTimestamps()->withPivot('is_active', 'created_at')->orderByPivot('created_at', 'desc');
     }
-
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
-
-    // public function events()
-    // {
-    //     return $this->hasMany(Event::class, 'player.id');
-    // }
 
     public function getEventsAttribute()
     {
