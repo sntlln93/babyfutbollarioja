@@ -14,6 +14,8 @@ use App\Http\Controllers\Dashboard\PlayerController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Web\ShowTournamentController;
+use App\Http\Controllers\Web\ShowTeamController;
+use App\Http\Controllers\Web\FetchGamesFromTeamController;
 use App\Http\Controllers\Dashboard\TournamentController;
 use App\Http\Controllers\Dashboard\AddClubsToTournamentController;
 use App\Http\Controllers\Dashboard\AddFixtureToTournamentController;
@@ -42,6 +44,10 @@ Route::name('web.')->group(function () {
     Route::get('/tournaments/{tournament}/scoreboard', [ShowTournamentController::class, 'scoreboard'])->name('tournament.scoreboard');
     Route::get('/tournaments/{tournament}/scorers', [ShowTournamentController::class, 'scorers'])->name('tournament.scorers');
     Route::get('/tournaments/{tournament}/fixture', [ShowTournamentController::class, 'fixture'])->name('tournament.fixture');
+
+    Route::get('/teams/{team}', [ShowTeamController::class, 'show'])->name('team.show');
+    Route::get('/teams/{team}/fixture', [FetchGamesFromTeamController::class, 'get'])->name('team.fixture');
+
 
     Route::get('posts', [ShowPostController::class, 'index'])->name('post.index');
     Route::get('posts/{post}', [ShowPostController::class, 'show'])->name('post.show');
