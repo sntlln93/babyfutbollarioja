@@ -23,7 +23,8 @@ use App\Http\Controllers\Dashboard\FetchTeamsFromBornDateController;
 use App\Http\Controllers\Dashboard\FetchFilteredGamesFromTournamentController;
 use App\Http\Controllers\Dashboard\FetchPlayersFromTeamController;
 use App\Http\Controllers\Dashboard\EndGameController;
-use App\Http\Controllers\Dashboard\ShowGameController;
+use App\Http\Controllers\Dashboard\ShowGameController as ShowGameDashboardController;
+use App\Http\Controllers\Web\ShowGameController as ShowGameWebController;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -48,6 +49,7 @@ Route::name('web.')->group(function () {
     Route::get('/teams/{team}', [ShowTeamController::class, 'show'])->name('team.show');
     Route::get('/teams/{team}/fixture', [FetchGamesFromTeamController::class, 'get'])->name('team.fixture');
 
+    Route::get('games/{game}', [ShowGameWebController::class, 'show'])->name('game.show');
 
     Route::get('posts', [ShowPostController::class, 'index'])->name('post.index');
     Route::get('posts/{post}', [ShowPostController::class, 'show'])->name('post.show');
@@ -75,7 +77,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     
     Route::get('tournaments/{tournament}/filter', [FetchFilteredGamesFromTournamentController::class, 'get'])->name('tournaments.filter');
 
-    Route::get('games/{game}', [ShowGameController::class, 'show'])->name('games.show');
+    Route::get('games/{game}', [ShowGameDashboardController::class, 'show'])->name('games.show');
     Route::get('games/{game}/end', [EndGameController::class, 'form'])->name('games.end-form');
     Route::put('games/{game}/end', [EndGameController::class, 'update'])->name('games.end');
 
