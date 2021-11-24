@@ -10,6 +10,8 @@
                     <ul>
                         <li>{{ $game->updated_at->isoFormat('DD [de] MMM Y') }}</li>
 
+                        <li><i class="fas fa-trophy"></i> Torneo {{ $game->tournament->name }}</li>
+
                         <li>
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             {{ $game->group }}
