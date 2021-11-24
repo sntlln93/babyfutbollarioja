@@ -193,9 +193,11 @@
             const li = document.createElement('li');
             
             li.innerHTML = `
-                <span class="head">
-                    ${game.name} <span class="date">${game.tournament.name} - ${game.group}</span>
-                </span>
+                <a href="${URL}/games/${game.id}">
+                    <span class="head">
+                        ${game.name} <span class="date">${game.tournament.name} - ${game.group}</span>
+                    </span>
+                </a>
 
                 <div class="goals-result">
                     <a href="${URL}/teams/${game.local.id}">
@@ -205,7 +207,7 @@
 
                     <span class="goals">
                         <b>${game.local_score}</b> - <b>${game.away_score}</b>
-                        <a href="single-result.html" class="btn theme">Ver más</a>
+                        <a href="${URL}/games/${game.id}" class="btn theme">Ver más</a>
                     </span>
 
                     <a href="${URL}/teams/${game.away.id}">

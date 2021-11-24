@@ -89,9 +89,10 @@
                                         <ul>
                                             @foreach ($recentGames as $game)
                                             <li>
-                                                <span class="head">
-                                                    {{ $game->name }}
-                                                </span>
+                                                <a href="{{ route('web.game.show', ['game' => $game->id]) }}">
+                                                    <span class="head">
+                                                        {{ $game->name }}
+                                                    </span></a>
 
                                                 <div class="goals-result d-flex flex-column justify-content-around">
                                                     <h5 class="text-center">{{ $game->group }}</h5>
