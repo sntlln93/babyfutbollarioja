@@ -130,7 +130,7 @@
                                                 <span class="position">
                                                     {{ $loop->iteration }}
                                                 </span>
-                                                <a href="single-team.html">
+                                                <a href="#">
                                                     <img src="{{ asset('storage/'.$scorer->logo) }}" alt="">
                                                     {{ $scorer->player->name }}
                                                 </a>

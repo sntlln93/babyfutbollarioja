@@ -80,13 +80,13 @@
                                             <ul>
                                                 <li><strong>Edad:</strong> <span>{{ $player->born_in->age }}</span>
                                                 <li><strong>En plantel desde:</strong> <span>{{
-                                                        $player->team->pivot->created_at->isoFormat('D [de] MMM [del]
+                                                        $player->team->pivot->created_at->isoFormat('D MMM [del]
                                                         YYYY') }}</span>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <a href="single-player.html" class="btn">Ver jugador <i
-                                                class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                        {{-- <a href="single-player.html" class="btn">Ver jugador <i
+                                                class="fa fa-angle-right" aria-hidden="true"></i></a> --}}
                                     </div>
                                 </div>
                                 @endforeach
