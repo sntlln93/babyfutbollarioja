@@ -8,7 +8,30 @@
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <style>
+        .filterBtn {
+            background-color: #fff;
+            border: 1px solid rgba(204, 204, 204, 0.8);
+            border-radius: 2em;
+            color: #000;
+            padding: 5px 10px;
+            text-align: center;
+            outline: none;
+            cursor: pointer;
+        }
 
+        .filterBtn:focus {
+            outline: none;
+        }
+
+        .filterBtn:hover,
+        .filterBtn--selected {
+            background-color: #2E59D9;
+            color: #fff;
+            font-weight: bold;
+            border: 1px solid rgba(204, 204, 204, 0.8);
+        }
+    </style>
     @yield('styles')
 </head>
 

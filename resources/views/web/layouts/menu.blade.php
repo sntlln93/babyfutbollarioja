@@ -9,7 +9,7 @@
     <ul class="sub-current">
         @foreach ($tournaments as $tournament)
         <li>
-            <a href="{{ route('web.tournament', ['tournament' => $tournament->id])}}">{{ $tournament->name }}</a>
+            <a href="{{ route('web.tournament.show', ['tournament' => $tournament->id])}}">{{ $tournament->name }}</a>
         </li>
         @endforeach
     </ul>
@@ -24,11 +24,11 @@
         </li>
         {{-- <li>
             <a href="{{ route('web.disciplinary.regulation')}}">Reglamento disciplinario</a>
-</li>
-<li>
-    <a href="{{ route('web.game.regulation')}}">Reglamento de juego</a>
-</li> --}}
-</ul>
+        </li>
+        <li>
+            <a href="{{ route('web.game.regulation')}}">Reglamento de juego</a>
+        </li> --}}
+    </ul>
 </li>
 
 <li>

@@ -1,21 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Web\WebController;
-use App\Http\Controllers\Web\ShowRegulations;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
-use App\Http\Controllers\Web\ShowPostController;
 use App\Http\Controllers\Dashboard\ClubController;
-
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\PlayerController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Web\ShowTournamentController;
-use App\Http\Controllers\Web\ShowTeamController;
-use App\Http\Controllers\Web\FetchGamesFromTeamController;
 use App\Http\Controllers\Dashboard\TournamentController;
 use App\Http\Controllers\Dashboard\AddClubsToTournamentController;
 use App\Http\Controllers\Dashboard\AddFixtureToTournamentController;
@@ -24,7 +17,17 @@ use App\Http\Controllers\Dashboard\FetchFilteredGamesFromTournamentController;
 use App\Http\Controllers\Dashboard\FetchPlayersFromTeamController;
 use App\Http\Controllers\Dashboard\EndGameController;
 use App\Http\Controllers\Dashboard\ShowGameController as ShowGameDashboardController;
+
+use App\Http\Controllers\Web\ShowPostController;
+use App\Http\Controllers\Web\WebController;
+use App\Http\Controllers\Web\ShowRegulations;
+use App\Http\Controllers\Web\ShowTournamentController;
+use App\Http\Controllers\Web\ShowTeamController;
+use App\Http\Controllers\Web\FetchGamesFromTeamController;
+use App\Http\Controllers\Web\FetchTeamsByTournamentController;
 use App\Http\Controllers\Web\ShowGameController as ShowGameWebController;
+use App\Http\Controllers\Web\FetchTournamentScorersController;
+use App\Http\Controllers\Web\FetchTournamentFixtureController;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -40,11 +43,10 @@ Route::name('web.')->group(function () {
     Route::get('/sponsors', [WebController::class, 'sponsors'])->name('sponsors');
     Route::get('/about-us', [WebController::class, 'about'])->name('about-us');
 
-    Route::get('/tournaments', [ShowTournamentController::class, 'index'])->name('tournaments');
-    Route::get('/tournaments/{tournament}', [ShowTournamentController::class, 'show'])->name('tournament');
-    Route::get('/tournaments/{tournament}/scoreboard', [ShowTournamentController::class, 'scoreboard'])->name('tournament.scoreboard');
-    Route::get('/tournaments/{tournament}/scorers', [ShowTournamentController::class, 'scorers'])->name('tournament.scorers');
-    Route::get('/tournaments/{tournament}/fixture', [ShowTournamentController::class, 'fixture'])->name('tournament.fixture');
+    Route::get('/tournaments/{tournament}', [ShowTournamentController::class, 'show'])->name('tournament.show');
+    Route::get('/tournaments/{tournament}/teams', [FetchTeamsByTournamentController::class, 'get'])->name('tournament.teams');
+    Route::get('/tournaments/{tournament}/scorers', [FetchTournamentScorersController::class, 'get'])->name('tournament.scorers');
+    Route::get('/tournaments/{tournament}/fixture', [FetchTournamentFixtureController::class, 'get'])->name('tournament.fixture');
 
     Route::get('/teams/{team}', [ShowTeamController::class, 'show'])->name('team.show');
     Route::get('/teams/{team}/fixture', [FetchGamesFromTeamController::class, 'get'])->name('team.fixture');

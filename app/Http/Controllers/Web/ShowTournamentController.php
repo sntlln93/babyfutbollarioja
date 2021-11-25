@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Models\Event;
 use App\Models\Tournament;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ScoreboardRow;
 
 class ShowTournamentController extends Controller
 {
-    public function index()
+    public function show(Tournament $tournament)
     {
-        return back();
+        $dates = $tournament->games->map(fn ($game) => $game->group)->unique()->values();
+        $scoreboard = $this->getScoreboard($tournament);
+
+        return view('web.tournaments.show')
+            ->with('tournament', $tournament)
+            ->with('dates', $dates)
+            ->with('scoreboard', $scoreboard);
     }
 
-    public function scoreboard(Tournament $tournament)
+    private function getScoreboard(Tournament $tournament)
     {
         $games = $tournament->games->whereNotNull('local_score')->whereNotNull('away_score');
 
@@ -24,34 +28,6 @@ class ShowTournamentController extends Controller
             $scoreboard[$game->away->id] =(new ScoreboardRow)->get($game->away, $game->away_score, $game->local_score, $scoreboard[$game->away->id] ?? []);
         }
 
-        return view('web.tournaments.scoreboard')->with('tournament', $tournament)
-        ->with('scoreboard', collect($scoreboard)->sortByDesc('pts'));
-    }
-
-    public function fixture(Tournament $tournament)
-    {
-        $tournament->load('games');
-        $dates = $tournament->games->map(fn ($game) => $game->group)->unique()->values();
-
-        return view('web.tournaments.fixture')
-        ->with('dates', $dates)
-        ->with('tournament', $tournament);
-    }
-
-    public function scorers(Tournament $tournament)
-    {
-        $topScorers = Event::query()
-            ->selectRaw('count(type) as goals, player as player, clubs.name as team, clubs.logo as logo')
-            ->join('teams', DB::raw("JSON_EXTRACT(events.player, '$.teamId')"), '=', 'teams.id')
-            ->join('clubs', 'clubs.id', '=', 'teams.club_id')
-            ->whereIn('game_id', $tournament->games->pluck('id'))
-            ->where('type', 'goal')
-            ->groupBy('player', 'type', 'logo', 'team')
-            ->orderByDesc('goals')
-            ->get();
-
-        return view('web.tournaments.top-scorers')
-        ->with('topScorers', $topScorers)
-        ->with('tournament', $tournament);
+        return collect($scoreboard)->sortByDesc('pts');
     }
 }

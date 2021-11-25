@@ -34,13 +34,18 @@
                 <!-- Nav Tabs -->
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active"><a href="#statistics" data-toggle="tab">Estadísticas</a></li>
-                    <li><a href="#groups" data-toggle="tab">Tabla de posiciones</a></li>
+                    <li>
+                        <a href="{{ route('web.tournament.show', ['tournament' => $tournament->id]) }}">
+                            Tabla de posiciones
+                        </a>
+                    </li>
                     {{-- <li><a href="#fixture" data-toggle="tab">Fixture</a></li> --}}
                 </ul>
                 <!-- End Nav Tabs -->
 
                 <!-- Content Tabs -->
                 <div class="tab-content">
+                    @if(count($tournament->categories) > 1)
                     <div class="mb-2" id="categoryToggle">
                         @foreach ($tournament->categories as $category)
                         <button class="category__filter {{ $loop->index === 0 ? " category__filter--active" : ""
@@ -48,15 +53,14 @@
                             {{ $category->name }}</button>
                         @endforeach
                     </div>
+                    @endif
                     <!-- Tab One - statistics -->
                     <div class="tab-pane active pb-5" id="statistics">
                         <div class="row">
                             <!-- Club Ranking -->
                             <div class="col-lg-4">
                                 <div class="club-ranking">
-                                    <h5><a
-                                            href="{{ route('web.tournament.scoreboard', ['tournament' => $tournament->id]) }}">Posiciones</a>
-                                    </h5>
+                                    <h5>Posiciones</h5>
                                     <div class="info-ranking">
                                         <ul>
                                             @foreach ($scoreboard as $row)
@@ -82,9 +86,7 @@
                             <!-- recent-results -->
                             <div class="col-lg-4">
                                 <div class="recent-results">
-                                    <h5><a
-                                            href="{{ route('web.tournament.fixture', ['tournament' => $tournament->id]) }}">Partidos
-                                            recientes</a></h5>
+                                    <h5>Partidos recientes</h5>
                                     <div class="info-results">
                                         <ul>
                                             @foreach ($recentGames as $game)
@@ -120,9 +122,7 @@
                             <!-- Top player -->
                             <div class="col-lg-4">
                                 <div class="player-ranking">
-                                    <h5><a
-                                            href="{{ route('web.tournament.scorers', ['tournament' => $tournament->id]) }}">Goleadores</a>
-                                    </h5>
+                                    <h5>Goleadores</h5>
                                     <div class="info-player">
                                         <ul>
                                             @foreach ($topScorers as $scorer)
@@ -150,9 +150,7 @@
 
                     <!-- Tab Two - Scoreboard List -->
                     <div class="tab-pane pb-5" id="groups">
-                        <h5 class="h5"><a class="text-white"
-                                href="{{ route('web.tournament.scoreboard', ['tournament' => $tournament->id]) }}">Tabla
-                                de posiciones</a></h5>
+                        <h5 class="h5">Tabla de posiciones</h5>
                         <table class="table-responsive mb-2 text-white scoreboard" style="background-color: #222">
                             <thead>
                                 <tr>
@@ -190,33 +188,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- End Tab Two - Scoreboard List -->
-
-                    <!-- Tab Three - Fixture -->
-                    {{-- <div class="tab-pane pb-5" id="fixture">
-                        <h5 class="h5 text-white">Fixtures</h5>
-                        <table class="table-responsive mb-2 text-white scoreboard" style="background-color: #222">
-                            <thead>
-                                <tr>
-                                    <th class="text-white">
-                                    </th>
-                                    @foreach ($tournament->clubs as $team)
-                                    <th class="text-white">{{ $team->name }}</th>
-                                    @endforeach
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($fixture as $row)
-                                <tr>
-                                    @foreach ($row as $col)
-                                    <th>{{ $col }}</th>
-                                    @endforeach
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div> --}}
-                    <!-- End Tab Three - Fixture -->
                 </div>
                 <!-- Content Tabs -->
             </div>
