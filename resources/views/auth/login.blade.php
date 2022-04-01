@@ -20,7 +20,7 @@
     <link href="{{ asset('dashboard/css/sb-admin-2.min.css') }}" rel="stylesheet" />
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-danger">
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -36,7 +36,7 @@
                                     </div>
 
                                     <form class="user" method="POST" action="{{ route('login') }}">
-                                      @csrf
+                                        @csrf
                                         <div class="form-group">
                                             <input id="username" type="text"
                                                 class="form-control @error('username') is-invalid @enderror"
@@ -45,9 +45,9 @@
                                                 placeholder="Ingresa tu nombre de usuario.." />
 
                                             @error('username')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
 
@@ -57,9 +57,9 @@
                                                 name="password" required autocomplete="current-password"
                                                 placeholder="Ingresa tu contraseña.." />
                                             @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
 
