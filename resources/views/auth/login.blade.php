@@ -20,7 +20,7 @@
     <link href="{{ asset('dashboard/css/sb-admin-2.min.css') }}" rel="stylesheet" />
 </head>
 
-<body class="bg-gradient-danger">
+<body class="bg-gradient-warning">
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
