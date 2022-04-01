@@ -11,7 +11,7 @@ echo "Deployment started ..."
 git pull origin master
 
 # Install composer dependencies
-composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader -y
 
 # Clear the old cache
 php artisan clear-compiled
